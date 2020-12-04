@@ -1,0 +1,21 @@
+FROM $1
+RUN cd /usr/local/ev_sdk \
+        && rm -f `find /usr/local/ev_sdk/src/ -type f | grep -iv  py`\
+        && rm -rf /usr/local/ev_sdk/README.md \
+        && rm -rf /usr/local/ev_sdk/doc  \
+        && rm -rf /usr/local/ev_sdk/build \
+        && rm -rf /usr/local/ev_sdk/build_image.sh \
+        && rm -rf /usr/local/ev_sdk/Dockerfile  \
+        && rm -rf /usr/local/ev_sdk/rm_image.sh \
+        && rm -rf /tmp/* \
+        && wget -O /$2 $3  \
+        && tar xf /$2  -C / \
+        && rm -f /$2  \
+        && rm -rf /usr/local/ias/ias_data \
+        && chmod +x /usr/local/ias/ias_start_container.sh
+ENV LANG C.UTF-8
+
+CMD ["/usr/local/ias/ias_start_container.sh"]
+
+
+
