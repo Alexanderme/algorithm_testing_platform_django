@@ -10,5 +10,5 @@ from .api.IasBuild import IasPackage
 
 
 urlpatterns = [
-    url(r'user/dingConfig', IasPackage.as_view()),
+    url(r'sdk/iasPackage', IasPackage.as_view()),
 ]

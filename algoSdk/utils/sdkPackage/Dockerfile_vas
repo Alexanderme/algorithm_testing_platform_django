@@ -1,4 +1,5 @@
-FROM $1
+ARG IMAGE_NAME="", package_name="", package_url=""
+FROM ${IMAGE_NAME}
 RUN cd /usr/local/ev_sdk \
         && rm -f `find /usr/local/ev_sdk/src/ -type f | grep -iv  py`\
         && rm -rf /usr/local/ev_sdk/README.md \
@@ -8,9 +9,9 @@ RUN cd /usr/local/ev_sdk \
         && rm -rf /usr/local/ev_sdk/Dockerfile  \
         && rm -rf /usr/local/ev_sdk/rm_image.sh \
         && rm -rf /tmp/* \
-        && wget -O /$2 $3  \
-        && tar xf /$2  -C / \
-        && rm -f /$2  \
+        && wget -O /${package_name} ${package_url}  \
+        && tar xf /${package_name}  -C / \
+        && rm -f /${package_name}  \
         && sed -i 's#9999#{{ algo_id }}#g' /usr/local/vas/local.conf \
         && rm -rf /usr/local/vas/vas_data \
         && chmod +x /usr/local/vas/vas_start_container.sh

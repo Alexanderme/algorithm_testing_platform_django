@@ -6,17 +6,28 @@
 """
 
 from .sdk_subprocess import sdk_subprocess
-from rest_framework.response import Response
+"""
+vas:  https://vas-1256261446.cos.ap-guangzhou.myqcloud.com
+vas_v4.1_cv3.4.tar.gz        
+vas_v4.1_cv4.1.tar.gz        
+vas_v4.2_cv4.1.tar.gz
+vas_v4.3_cv4.1.tar.gz 
+vas_v4.3_cv3.4.tar.gz
 
+svas   https://vas-1256261446.cos.ap-guangzhou.myqcloud.com
+svas_v1.0cv3.4.tar.gz
+svas_v1.0cv4.1.tar.gz
+"""
 
-def docker_build(image_build_name, dockerfile_name):
+def docker_build(image_build_name, dockerfile_name, image_name, package_name, package_url ):
     """
     用于dockerfile来创建封装好的vas, ias镜像
     :param image_build_name: 封装后的镜像名称
     :param dockerfile_name: dockerfile文件
     :return:
     """
-    docker_build = "docker build -f %s -t %s ." % (dockerfile_name, image_build_name)
+    docker_build = f"docker build -t {image_build_name} --build-arg IMAGE_NAME={image_name} " \
+                   f"package_name={package_name} package_url={package_url} -f {dockerfile_name}/Dockerfile ."
     status, _ = sdk_subprocess(docker_build)
     if not status:
         return False
