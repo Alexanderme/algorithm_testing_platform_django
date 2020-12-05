@@ -40,7 +40,7 @@ class IasPackage(APIView):
         image_name = serializer.data.get("image_name")
         port = serializer.data.get("port")
         ias_version = serializer.data.get("ias_version")
-        dockerfile_ias = os.path.join(path, "/utils/sdkPackage/Dockerfile_ias")
+        dockerfile_ias = os.path.join(path, "utils/sdkPackage/Dockerfile_ias")
         image = image_name + "test"
         # 封装镜像
         if ias_version == "3.4":
