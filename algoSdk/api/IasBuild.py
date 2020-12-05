@@ -37,7 +37,7 @@ class IasPackage(APIView):
         serializer = IasPackageSerializers(data=data)
         if not serializer.is_valid():
             return Response({"87": "参数错误"})
-        image_name = serializer.data.get("iamge_name")
+        image_name = serializer.data.get("image_name")
         port = serializer.data.get("port")
         ias_version = serializer.data.get("ias_version")
         dockerfile_ias = os.path.join(path, "/utils/sdkPackage/Dockerfile_ias")
