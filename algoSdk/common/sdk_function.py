@@ -31,10 +31,11 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
     :return:
     """
     docker_build = f"docker build -t {image_build_name} --build-arg IMAGE_NAME={image_name} " \
-                   f"--build-arg package_name={package_name} --build-arg package_url={package_url} -f {dockerfile_name}/Dockerfile ."
+                   f"--build-arg PACKAGE_NAME={package_name} --build-arg PACKAGE_URL={package_url} -f {dockerfile_name} ."
     status, _ = sdk_subprocess(docker_build)
     if not status:
         return False
+    return status
 
 
 
@@ -50,9 +51,12 @@ def docker_run_ias(image_name, port=None):
         return False, res
     contain_id = res[:12]
     # 复制授权文件到容器
-    authorization_file = os.path.join(path, "utils/sdk_authorization/give_license.sh")
-    f"docker cp {authorization_file} {contain_id}:/root"
-    ias_install = f"docker exec  {contain_id} bash /root/give_license.sh &"
+    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license.sh")
+    docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
+    status, res = sdk_subprocess(docker_authorization)
+    if not status:
+        return False, res
+    ias_install = f"docker exec  {contain_id} bash /root/give_license.sh"
     status, res = sdk_subprocess(ias_install)
     print(res)
     if not status:
