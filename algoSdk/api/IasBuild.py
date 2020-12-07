@@ -1,6 +1,6 @@
 """
     #  @ModuleName: IasBuild
-    #  @Function: 
+    #  @Function:
     #  @Author: Ljx
     #  @Time: 2020/12/4 14:32
 """
@@ -39,11 +39,11 @@ class IasPackage(APIView):
             return Response({"87": "参数错误"})
         image_name = serializer.data.get("image_name")
         port = serializer.data.get("port")
-        ias_version = serializer.data.get("ias_version")
+        version = serializer.data.get("version")
         dockerfile_ias = os.path.join(path, "utils/sdkPackage/Dockerfile_ias")
         image = image_name + "test"
         # 封装镜像
-        if ias_version == "3.4":
+        if version == "3.4":
             status = docker_build(image, dockerfile_ias, image_name, ias_3_name, ias_3_url)
             if not status:
                 return Response({"code": "91", "msg": "dockerfile生成失败"})

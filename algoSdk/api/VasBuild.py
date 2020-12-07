@@ -47,16 +47,16 @@ class VasPackage(APIView):
             return Response({"87": "参数错误"})
         image_name = obj.data.get("image_name")
         port = obj.data.get("port")
-        vas_version = obj.data.get("vas_version")
-        dockerfile_ias = os.path.join(path, "utils/sdkPackage/Dockerfile_vas")
+        version = obj.data.get("version")
+        dockerfile_vas = os.path.join(path, "utils/sdkPackage/Dockerfile_vas")
         image = image_name + "test"
         # 封装镜像
-        if vas_version == "3.4":
-            status = docker_build(image, dockerfile_ias, image_name, vas_3_name, vas_3_url)
+        if version == "3.4":
+            status = docker_build(image, dockerfile_vas, image_name, vas_3_name, vas_3_url)
             if not status:
                 return Response({"code": "91", "msg": "dockerfile生成失败"})
         else:
-            status = docker_build(image, dockerfile_ias, image_name, vas_4_name, vas_4_url)
+            status = docker_build(image, dockerfile_vas, image_name, vas_4_name, vas_4_url)
             if not status:
                 return Response({"code": "91", "msg": "dockerfile生成失败"})
         # 运行镜像
