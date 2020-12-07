@@ -14,15 +14,6 @@ from ..common.sdk_function import docker_run_ias
 import os
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-"""
-ias:     https://ias-1256261446.cos.ap-guangzhou.myqcloud.com
-ias_v4.55_cv3.4.tar.gz        
-ias_v4.73_cv3.4.tar.gz                
-ias_v4.74_cv4.1.tar.gz 
-ias_v4.90_cv3.4.tar.gz   
-"""
-
 ias_4_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.74_cv4.1.tar.gz"
 ias_3_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.90_cv3.4.tar.gz"
 ias_4_name = "ias_v4.74_cv4.1.tar.gz"
@@ -41,7 +32,7 @@ class IasPackage(APIView):
         port = serializer.data.get("port")
         version = serializer.data.get("version")
         dockerfile_ias = os.path.join(path, "utils/sdkPackage/Dockerfile_ias")
-        image = image_name + "test"
+        image = image_name + "_test_ias"
         # 封装镜像
         if version == "3.4":
             status = docker_build(image, dockerfile_ias, image_name, ias_3_name, ias_3_url)

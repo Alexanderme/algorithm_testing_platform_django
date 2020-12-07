@@ -17,7 +17,7 @@ svas_v1.0cv4.1.tar.gz
 """
 
 
-def docker_build(image_build_name, dockerfile_name, image_name, package_name, package_url ):
+def docker_build(image_build_name, dockerfile_name, image_name, package_name, package_url):
     """
     用于dockerfile来创建封装好的vas, ias镜像
     :param image_build_name: 封装后的镜像名称
@@ -31,6 +31,25 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
         return False
     return status
 
+
+def docker_run_sdk(image_name):
+    docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
+                 f"NVIDIA_VISIBLE_DEVICES=0 --rm {image_name}"
+    status, res = sdk_subprocess(docker_run)
+    if not status:
+        return False, res
+    contain_id = res[:12]
+    # 复制授权文件到容器
+    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
+    docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
+    status, res = sdk_subprocess(docker_authorization)
+    if not status:
+        return False, res
+    ias_install = f"docker exec  {contain_id} bash /root/give_license_ias.sh"
+    status, res = sdk_subprocess(ias_install)
+    if not status:
+        return False, res
+    return True, contain_id
 
 
 def docker_run_ias(image_name, port=None):
@@ -57,7 +76,6 @@ def docker_run_ias(image_name, port=None):
     return True, "sucess"
 
 
-
 def docker_run_vas(image_name, port=None):
     if port is None:
         docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
@@ -81,9 +99,64 @@ def docker_run_vas(image_name, port=None):
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
-    ias_install = f"docker exec  {contain_id} bash /root/give_license_vas.sh"
-    status, res = sdk_subprocess(ias_install)
-    if not status:
-        return False, res
+    vas_install = f"docker exec  {contain_id} bash /root/give_license_vas.sh &"
+    os.popen(vas_install)
     return True, "sucess"
 
+
+def grep_opencv_version(image):
+    status, container_id = docker_run_sdk(image)
+    if not status:
+        return False, "sdk算法启动失败"
+    grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|grep 'opencv.*4\.[0-9]'\"|" \
+                  "awk 'END{print $1}'|cut -c 19-"
+    status, opencv_version = sdk_subprocess(grep_opencv)
+    if not status:
+        return False, "获取OpenCV版本失败"
+    errmsg = {"OpenCV_version": opencv_version}
+    sdk_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
+    status, res_p = sdk_subprocess(sdk_message)
+    if "No such file or directory" not in res_p:
+        errmsg.update({"sdk_version": "算法SDK版本为3.0系列 配置路径为:/usr/local/ev_sdk/config/algo_config.json \n"})
+    else:
+        return False, "算法SDK版本为2.0系列 不输出内容"
+
+    auth_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/3rd/license/lib/pkgconfig/ji_license.pc |grep -i version'"
+    status, res = sdk_subprocess(auth_message)
+    if not res.startswith("cat"):
+        errmsg.update({"sdk_authorization": "当前默认应该使用最新的版本库20.1.3, 当前算法授权库版本为" + res})
+    else:
+        errmsg.update({"sdk_authorization": "获取授权信息失败, 授权库不是最新的20.1.3"})
+
+    # 公私钥  配置文件 查看
+    privateKey = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
+    status, privateKey = sdk_subprocess(privateKey)
+    if not status:
+        errmsg.update({"privateKey": "获取获取失败"})
+    errmsg.update({"privateKey": privateKey})
+    algo_config = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/config/algo_config.json'"
+    status, algo_config = sdk_subprocess(algo_config)
+    if not status:
+        errmsg.update({"algo_config": "获取获取配置失败"})
+
+    if opencv_version.startswith("3."):
+        errmsg = {"algo_message": '当前OpenCV版本为:3.4, vas安装包:vas_v4.3_cv3.4.tar.gz, ias安装包:ias_v4.90_cv3.4.tar.gz'}
+        stop = f"docker stop {container_id}"
+        status, res = sdk_subprocess(stop)
+        if not status:
+            errmsg.update({"stop_container": "停用容器失败"})
+        return True, errmsg
+    elif opencv_version.startswith("4."):
+        errmsg = {"algo_message": '当前OpenCV版本为:4.1, vas安装包:vas_v4.3_cv4.1.tar.gz, ias安装包:ias_v4.74_cv4.1.tar.gz'}
+        stop = f"docker stop {container_id}"
+        status, res = sdk_subprocess(stop)
+        if not status:
+            errmsg.update({"stop_container": "停用容器失败"})
+    else:
+        errmsg = {"algo_message": '当前OpenCV版本为: 获取失败'}
+        stop = f"docker stop {container_id}"
+        status, res = sdk_subprocess(stop)
+        if not status:
+            errmsg.update({"stop_container": "停用容器失败"})
+
+        return True, errmsg

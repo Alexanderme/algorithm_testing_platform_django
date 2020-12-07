@@ -36,3 +36,7 @@ def dockerfile_error():
 
 def docker_run_faild():
     return '92', '算法启动失败'
+
+
+def parameter_wrong():
+    return '87', '参数错误'

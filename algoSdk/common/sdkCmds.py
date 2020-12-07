@@ -10,3 +10,5 @@
 run_algo_cmd = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e NVIDIA_VISIBLE_DEVICES=0 --rm "
 
 
+
+
