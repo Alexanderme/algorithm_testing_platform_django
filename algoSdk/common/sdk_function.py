@@ -10,12 +10,6 @@ import os
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 """
-vas:  https://vas-1256261446.cos.ap-guangzhou.myqcloud.com
-vas_v4.1_cv3.4.tar.gz        
-vas_v4.1_cv4.1.tar.gz        
-vas_v4.2_cv4.1.tar.gz
-vas_v4.3_cv4.1.tar.gz 
-vas_v4.3_cv3.4.tar.gz
 
 svas   https://vas-1256261446.cos.ap-guangzhou.myqcloud.com
 svas_v1.0cv3.4.tar.gz
@@ -51,16 +45,16 @@ def docker_run_ias(image_name, port=None):
         return False, res
     contain_id = res[:12]
     # 复制授权文件到容器
-    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license.sh")
+    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
     docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
-    ias_install = f"docker exec  {contain_id} bash /root/give_license.sh"
+    ias_install = f"docker exec  {contain_id} bash /root/give_license_ias.sh"
     status, res = sdk_subprocess(ias_install)
-    print(res)
     if not status:
         return False, res
+    return True, "sucess"
 
 
 
@@ -71,8 +65,25 @@ def docker_run_vas(image_name, port=None):
     else:
         docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
                      f"NVIDIA_VISIBLE_DEVICES=0 --rm -p {port}:10000 {image_name}"
-
     status, res = sdk_subprocess(docker_run)
     if not status:
-        # return Response({"code": "92", "msg": "算法启动失败"})
         return False, res
+    contain_id = res[:12]
+    # 复制授权文件到容器
+    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_vas.sh")
+    docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
+    status, res = sdk_subprocess(docker_authorization)
+    if not status:
+        return False, res
+    # 负责运行文件到容器
+    run_file = os.path.join(path, "utils/sdkAuthorization/run.conf")
+    docker_authorization = f"docker cp {run_file} {contain_id}:/usr/local/vas"
+    status, res = sdk_subprocess(docker_authorization)
+    if not status:
+        return False, res
+    ias_install = f"docker exec  {contain_id} bash /root/give_license_vas.sh"
+    status, res = sdk_subprocess(ias_install)
+    if not status:
+        return False, res
+    return True, "sucess"
+
