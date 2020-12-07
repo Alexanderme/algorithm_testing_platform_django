@@ -6,6 +6,9 @@
 """
 
 from .sdk_subprocess import sdk_subprocess
+import os
+
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 """
 vas:  https://vas-1256261446.cos.ap-guangzhou.myqcloud.com
 vas_v4.1_cv3.4.tar.gz        
@@ -19,6 +22,7 @@ svas_v1.0cv3.4.tar.gz
 svas_v1.0cv4.1.tar.gz
 """
 
+
 def docker_build(image_build_name, dockerfile_name, image_name, package_name, package_url ):
     """
     用于dockerfile来创建封装好的vas, ias镜像
@@ -27,7 +31,7 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
     :return:
     """
     docker_build = f"docker build -t {image_build_name} --build-arg IMAGE_NAME={image_name} " \
-                   f"package_name={package_name} package_url={package_url} -f {dockerfile_name}/Dockerfile ."
+                   f"--build-arg package_name={package_name} --build-arg package_url={package_url} -f {dockerfile_name}/Dockerfile ."
     status, _ = sdk_subprocess(docker_build)
     if not status:
         return False
@@ -43,7 +47,15 @@ def docker_run_ias(image_name, port=None):
                      f"NVIDIA_VISIBLE_DEVICES=0 --rm -p {port}:80 {image_name}"
     status, res = sdk_subprocess(docker_run)
     if not status:
-        # return Response({"code": "92", "msg": "算法启动失败"})
+        return False, res
+    contain_id = res[:12]
+    # 复制授权文件到容器
+    authorization_file = os.path.join(path, "utils/sdk_authorization/give_license.sh")
+    f"docker cp {authorization_file} {contain_id}:/root"
+    ias_install = f"docker exec  {contain_id} bash /root/give_license.sh &"
+    status, res = sdk_subprocess(ias_install)
+    print(res)
+    if not status:
         return False, res
 
 

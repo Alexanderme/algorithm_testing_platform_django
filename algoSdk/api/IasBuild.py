@@ -23,8 +23,8 @@ ias_v4.74_cv4.1.tar.gz
 ias_v4.90_cv3.4.tar.gz   
 """
 
-ias_4_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.74_cv4.1.tar.gz "
-ias_3_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.74_cv4.1.tar.gz "
+ias_4_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.74_cv4.1.tar.gz"
+ias_3_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.90_cv3.4.tar.gz"
 ias_4_name = "ias_v4.74_cv4.1.tar.gz"
 ias_3_name = "ias_v4.90_cv3.4.tar.gz"
 

@@ -1,7 +1,7 @@
 ARG IMAGE_NAME
-ARG package_name
-ARG package_url
-FROM ${IMAGE_NAME}
+FROM $IMAGE_NAME
+ARG PACKAGE_NAME
+ARG PACKAGE_URL
 RUN cd /usr/local/ev_sdk \
         && rm -f `find /usr/local/ev_sdk/src/ -type f | grep -iv  py`\
         && rm -rf /usr/local/ev_sdk/README.md \
@@ -11,14 +11,11 @@ RUN cd /usr/local/ev_sdk \
         && rm -rf /usr/local/ev_sdk/Dockerfile  \
         && rm -rf /usr/local/ev_sdk/rm_image.sh \
         && rm -rf /tmp/* \
-        && wget -O /${package_name} ${package_url}  \
-        && tar xf /${package_name}  -C / \
-        && rm -f /${package_name}  \
+        && wget -O /${PACKAGE_NAME} ${PACKAGE_URL}  \
+        && tar xf /${PACKAGE_NAME}  -C / \
+        && rm -f /${PACKAGE_NAME}  \
         && rm -rf /usr/local/ias/ias_data \
         && chmod +x /usr/local/ias/ias_start_container.sh
 ENV LANG C.UTF-8
 
 CMD ["/usr/local/ias/ias_start_container.sh"]
-
-
-
