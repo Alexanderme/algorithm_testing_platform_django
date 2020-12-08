@@ -105,6 +105,7 @@ def docker_run_vas(image_name, port=None):
 
 
 def grep_opencv_version(image):
+    errmsg = {}
     status, container_id = docker_run_sdk(image)
     if not status:
         return False, "sdk算法启动失败"
@@ -113,7 +114,7 @@ def grep_opencv_version(image):
     status, opencv_version = sdk_subprocess(grep_opencv)
     if not status:
         return False, "获取OpenCV版本失败"
-    errmsg = {"OpenCV_version": opencv_version}
+    errmsg.update({"OpenCV_version": opencv_version})
     sdk_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
     status, res_p = sdk_subprocess(sdk_message)
     if "No such file or directory" not in res_p:
@@ -138,25 +139,25 @@ def grep_opencv_version(image):
     status, algo_config = sdk_subprocess(algo_config)
     if not status:
         errmsg.update({"algo_config": "获取获取配置失败"})
-
+    errmsg.update({"algo_config": algo_config})
     if opencv_version.startswith("3."):
-        errmsg = {"algo_message": '当前OpenCV版本为:3.4, vas安装包:vas_v4.3_cv3.4.tar.gz, ias安装包:ias_v4.90_cv3.4.tar.gz'}
+        errmsg.update({"algo_message": '当前OpenCV版本为:3.4, vas安装包:vas_v4.3_cv3.4.tar.gz, ias安装包:ias_v4.90_cv3.4.tar.gz'})
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
             errmsg.update({"stop_container": "停用容器失败"})
         return True, errmsg
     elif opencv_version.startswith("4."):
-        errmsg = {"algo_message": '当前OpenCV版本为:4.1, vas安装包:vas_v4.3_cv4.1.tar.gz, ias安装包:ias_v4.74_cv4.1.tar.gz'}
+        errmsg.update({"algo_message": '当前OpenCV版本为:4.1, vas安装包:vas_v4.3_cv4.1.tar.gz, ias安装包:ias_v4.74_cv4.1.tar.gz'})
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
             errmsg.update({"stop_container": "停用容器失败"})
     else:
-        errmsg = {"algo_message": '当前OpenCV版本为: 获取失败'}
+        errmsg.update({"algo_message": '当前OpenCV版本为: 获取失败'})
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
             errmsg.update({"stop_container": "停用容器失败"})
 
-        return True, errmsg
+    return True, errmsg
