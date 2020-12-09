@@ -112,8 +112,13 @@ def grep_opencv_version(image):
     grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|grep 'opencv.*4\.[0-9]'\"|" \
                   "awk 'END{print $1}'|cut -c 19-"
     status, opencv_version = sdk_subprocess(grep_opencv)
-    if not status:
-        return False, "获取OpenCV版本失败"
+    if not opencv_version.startswith('4.'):
+        grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|grep 'opencv.*3\.[0-9]'\"|" \
+                      "awk 'END{print $1}'|cut -c 19-"
+        status, opencv_version = sdk_subprocess(grep_opencv)
+        if not status:
+            errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
+        errmsg.update({"OpenCV_version": opencv_version})
     errmsg.update({"OpenCV_version": opencv_version})
     sdk_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
     status, res_p = sdk_subprocess(sdk_message)

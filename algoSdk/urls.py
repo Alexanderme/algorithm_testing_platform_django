@@ -9,10 +9,12 @@ from django.conf.urls import url
 from .api.IasBuild import IasPackage
 from .api.VasBuild import VasPackage
 from .api.AlgoMessage import AlgoOpencvVersion
+from .api.test import TestView1
 
 
 urlpatterns = [
     url(r'sdk/iasPackage', IasPackage.as_view()),
     url(r'sdk/vasPackage', VasPackage.as_view()),
     url(r'sdk/algoMessage', AlgoOpencvVersion.as_view()),
+    url(r'sdk/test', TestView1.as_view()),
 ]

@@ -125,3 +125,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#celery peiz1
+
+broker_url = 'redis://47.113.116.86:6379/1'
+result_backend = 'redis://47.113.116.86:6379/3'
+
+# Celery配置
+CELERY_BROKER_URL = broker_url
+CELERY_RESULT_BACKEND = result_backend
+CELERY_ACCEPT_CONTENT = ["json", "msgpack"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_TIMEZONE = "Asia/Shanghai"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
