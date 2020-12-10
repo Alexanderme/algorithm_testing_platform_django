@@ -21,3 +21,9 @@ class VasPackageSerializers(serializers.Serializer):
 
 class AlgoOpencvVersionSerializers(serializers.Serializer):
     image_name = serializers.CharField(max_length=512)
+
+
+class AlgoResSerializer(serializers.Serializer):
+    image_name = serializers.CharField(max_length=512)
+    args = serializers.CharField(max_length=1024)
+    file_name = serializers.FileField(upload_to='upload')

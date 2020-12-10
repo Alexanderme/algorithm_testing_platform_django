@@ -6,7 +6,7 @@
 """
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
-from ..tasks import TestView3
+from algoSdk.celery_tasks.algo_res_task import TestView3
 
 class TestView1(GenericAPIView):
   def get(self, request):

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -129,8 +129,8 @@ STATIC_URL = '/static/'
 
 #celery peiz1
 
-broker_url = 'redis://47.113.116.86:6379/1'
-result_backend = 'redis://47.113.116.86:6379/3'
+broker_url = 'redis://192.168.1.103:6379/1'
+result_backend = 'redis://192.168.1.103:6379/3'
 
 # Celery配置
 CELERY_BROKER_URL = broker_url
@@ -140,3 +140,6 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_TIMEZONE = "Asia/Shanghai"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+# 用于存储算法运行文件路径
+Algo_Res_dir = os.path.join(BASE_DIR, "algoSdk/files/algoFilesdir")

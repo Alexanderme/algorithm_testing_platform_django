@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algoSdk/api/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/celery_tasks/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/common/iter_files.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/celery.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/celery_tasks/algo_res_task.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dj_extremevision/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dj_extremevision/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,11 +49,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\celery_tasks" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_authorization" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\common" />
-      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdkPackage" />
     </key>
   </component>
   <component name="RunManager" selected="Python.sdk_function">
@@ -138,7 +141,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606958378901</updated>
-      <workItem from="1606958379990" duration="50566000" />
+      <workItem from="1606958379990" duration="52350000" />
+      <workItem from="1607598262372" duration="6413000" />
     </task>
     <servers />
   </component>
@@ -166,10 +170,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1607312652291" />
-    <state x="461" y="156" key="SettingsEditor" timestamp="1606958459077">
+    <state x="461" y="156" key="SettingsEditor" timestamp="1607599605153">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="461" y="156" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1606958459077" />
+    <state x="461" y="156" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607599605153" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1607075523871">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
