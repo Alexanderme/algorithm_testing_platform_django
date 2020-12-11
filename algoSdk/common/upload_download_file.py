@@ -7,12 +7,12 @@
 import os
 
 
-def upload_file(requests, file_name, save_dir):
+def upload_file(obj, save_dir):
     """
     用于处理上传文件
     :return:
     """
-    File = requests.FILES.get(file_name, None)
+    File = obj.data.get('file_name')
     file_dir = os.path.join(save_dir, File.name)
     if File is None:
         return False

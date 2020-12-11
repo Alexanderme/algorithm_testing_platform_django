@@ -19,9 +19,8 @@ class AlgoRes(APIView):
             return Response({"87": "参数错误"})
         image_name = obj.data.get('image_name')
         args = obj.data.get('args')
-        file_name = obj.data.get('file_name')
         # 保存文件
-        status = upload_file(requests, file_name, Algo_Res_dir)
+        status = upload_file(obj, Algo_Res_dir)
         if not status:
             return Response({"96": "文件上传失败"})
         return Response({"100": "文件上传成功"})

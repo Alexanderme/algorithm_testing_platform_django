@@ -10,6 +10,7 @@ from .api.IasBuild import IasPackage
 from .api.VasBuild import VasPackage
 from .api.AlgoMessage import AlgoOpencvVersion
 from .api.test import TestView1
+from .api.AlgoRunRes import AlgoRes
 
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     url(r'sdk/vasPackage', VasPackage.as_view()),
     url(r'sdk/algoMessage', AlgoOpencvVersion.as_view()),
     url(r'sdk/test', TestView1.as_view()),
+    url(r'sdk/algoRes', AlgoRes.as_view()),
 ]
