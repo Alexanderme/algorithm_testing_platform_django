@@ -6,6 +6,7 @@
 """
 
 from .sdk_subprocess import sdk_subprocess
+import re
 import os
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +42,7 @@ def docker_run_sdk(image_name):
     container_id = res[:12]
     # 复制授权文件到容器
     authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
-    docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
+    docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
@@ -106,16 +107,21 @@ def docker_run_vas(image_name, port=None):
 
 def grep_opencv_version(image):
     errmsg = {}
+
     status, container_id = docker_run_sdk(image)
     if not status:
         return False, "sdk算法启动失败"
-    grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|grep 'opencv.*4\.[0-9]'\"|" \
-                  "awk 'END{print $1}'|cut -c 19-"
+    grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
+                  "grep 'opencv.*4\.[0-9]'|awk 'END{print $1}'\""
     status, opencv_version = sdk_subprocess(grep_opencv)
+    pattern_3 = ".*?(3.\d)"
+    opencv_version = re.findall(pattern_3, opencv_version)[0]
     if not opencv_version.startswith('4.'):
-        grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|grep 'opencv.*3\.[0-9]'\"|" \
-                      "awk 'END{print $1}'|cut -c 19-"
+        grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
+                  "grep 'opencv.*3\.[0-9]'|awk 'END{print $1}'\""
         status, opencv_version = sdk_subprocess(grep_opencv)
+        pattern_4 = ".*?(4.\d)"
+        opencv_version = re.findall(pattern_4, opencv_version)[0]
         if not status:
             errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
         errmsg.update({"OpenCV_version": opencv_version})
@@ -168,7 +174,7 @@ def grep_opencv_version(image):
         status, res = sdk_subprocess(stop)
         if not status:
             errmsg.update({"stop_container": "停用容器失败"})
-
+    errmsg.update({"code": "100"})
     return True, errmsg
 
 

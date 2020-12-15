@@ -23,7 +23,7 @@ class AlgoOpencvVersionSerializers(serializers.Serializer):
 
 class AlgoResSerializer(serializers.Serializer):
     image_name = serializers.CharField(max_length=512)
-    args = serializers.CharField(max_length=1024)
+    args = serializers.CharField(max_length=1024, required=False)
     file_name = serializers.FileField()
 
 class CeleryTaskSerializer(serializers.Serializer):
