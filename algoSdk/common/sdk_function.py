@@ -114,9 +114,11 @@ def grep_opencv_version(image):
     grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
                   "grep 'opencv.*4\.[0-9]'|awk 'END{print $1}'\""
     status, opencv_version = sdk_subprocess(grep_opencv)
-    pattern_3 = ".*?(3.\d)"
-    opencv_version = re.findall(pattern_3, opencv_version)[0]
-    if not opencv_version.startswith('4.'):
+    print(type(opencv_version))
+    if not opencv_version:
+        pattern_3 = ".*?(3.\d)"
+        opencv_version = re.findall(pattern_3, opencv_version)[0]
+    else:
         grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
                   "grep 'opencv.*3\.[0-9]'|awk 'END{print $1}'\""
         status, opencv_version = sdk_subprocess(grep_opencv)
