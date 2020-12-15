@@ -114,18 +114,18 @@ def grep_opencv_version(image):
     grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
                   "grep 'opencv.*4\.[0-9]'|awk 'END{print $1}'\""
     status, opencv_version = sdk_subprocess(grep_opencv)
-    print(type(opencv_version))
-    if not opencv_version:
+    if not status:
+        errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
+    try:
         pattern_3 = ".*?(3.\d)"
         opencv_version = re.findall(pattern_3, opencv_version)[0]
-    else:
+        errmsg.update({"OpenCV_version": opencv_version})
+    except:
         grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
                   "grep 'opencv.*3\.[0-9]'|awk 'END{print $1}'\""
         status, opencv_version = sdk_subprocess(grep_opencv)
         pattern_4 = ".*?(4.\d)"
         opencv_version = re.findall(pattern_4, opencv_version)[0]
-        if not status:
-            errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
         errmsg.update({"OpenCV_version": opencv_version})
     errmsg.update({"OpenCV_version": opencv_version})
     sdk_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
