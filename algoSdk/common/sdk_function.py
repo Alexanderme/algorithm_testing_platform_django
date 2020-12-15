@@ -38,18 +38,18 @@ def docker_run_sdk(image_name):
     status, res = sdk_subprocess(docker_run)
     if not status:
         return False, res
-    contain_id = res[:12]
+    container_id = res[:12]
     # 复制授权文件到容器
     authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
     docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
-    ias_install = f"docker exec  {contain_id} bash /root/give_license_ias.sh"
+    ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh"
     status, res = sdk_subprocess(ias_install)
     if not status:
         return False, res
-    return True, contain_id
+    return True, container_id
 
 
 def docker_run_ias(image_name, port=None):
@@ -62,18 +62,18 @@ def docker_run_ias(image_name, port=None):
     status, res = sdk_subprocess(docker_run)
     if not status:
         return False, res
-    contain_id = res[:12]
+    container_id = res[:12]
     # 复制授权文件到容器
     authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
-    docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
+    docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
-    ias_install = f"docker exec  {contain_id} bash /root/give_license_ias.sh"
+    ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh"
     status, res = sdk_subprocess(ias_install)
     if not status:
         return False, res
-    return True, "sucess"
+    return True, container_id
 
 
 def docker_run_vas(image_name, port=None):
@@ -86,22 +86,22 @@ def docker_run_vas(image_name, port=None):
     status, res = sdk_subprocess(docker_run)
     if not status:
         return False, res
-    contain_id = res[:12]
+    container_id = res[:12]
     # 复制授权文件到容器
     authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_vas.sh")
-    docker_authorization = f"docker cp {authorization_file} {contain_id}:/root"
+    docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
     # 负责运行文件到容器
     run_file = os.path.join(path, "utils/sdkAuthorization/run.conf")
-    docker_authorization = f"docker cp {run_file} {contain_id}:/usr/local/vas"
+    docker_authorization = f"docker cp {run_file} {container_id}:/usr/local/vas"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         return False, res
-    vas_install = f"docker exec  {contain_id} bash /root/give_license_vas.sh &"
+    vas_install = f"docker exec  {container_id} bash /root/give_license_vas.sh &"
     os.popen(vas_install)
-    return True, "sucess"
+    return True, container_id
 
 
 def grep_opencv_version(image):
@@ -139,6 +139,10 @@ def grep_opencv_version(image):
     status, privateKey = sdk_subprocess(privateKey)
     if not status:
         errmsg.update({"privateKey": "获取获取失败"})
+    if privateKey == "":
+        errmsg.update({"Sdk_version": 2.5})
+    else:
+        errmsg.update({"Sdk_version": 3.0})
     errmsg.update({"privateKey": privateKey})
     algo_config = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/config/algo_config.json'"
     status, algo_config = sdk_subprocess(algo_config)
@@ -166,3 +170,21 @@ def grep_opencv_version(image):
             errmsg.update({"stop_container": "停用容器失败"})
 
     return True, errmsg
+
+
+def clean_env(*args, **kwargs):
+    """
+    用于清理环境, 删除图片等弃用数据
+    :return:
+    """
+    container_id = kwargs.get("container_id")
+    ori_files_dir = kwargs.get("ori_files_dir")
+    res_files_dir = kwargs.get("res_files_dir")
+    # other =  kwargs.get("other")
+    if container_id:
+        os.system(f"docker stop {container_id}")
+    # 删除 运行文件
+    if ori_files_dir:
+        os.system(f"rm -rf {ori_files_dir}")
+    if res_files_dir:
+        os.system(f"rm -rf {res_files_dir}")

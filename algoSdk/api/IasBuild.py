@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from ..serializers.serializers import IasPackageSerializers
 from ..common.sdk_function import docker_build
 from ..common.sdk_function import docker_run_ias
+from ..common.sdk_requests import get_sdk_opencv_version
 
 import os
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,11 +31,14 @@ class IasPackage(APIView):
             return Response({"87": "参数错误"})
         image_name = serializer.data.get("image_name")
         port = serializer.data.get("port")
-        version = serializer.data.get("version")
+
         dockerfile_ias = os.path.join(path, "utils/sdkPackage/Dockerfile_ias")
         image = image_name + "_test_ias"
+        opencv_version = get_sdk_opencv_version(image_name)
+        if not opencv_version:
+            return Response({"code": "95", "msg": "算法启动失败, 获取算法OpenCV失败"})
         # 封装镜像
-        if version == "3.4":
+        if opencv_version.startswith("3."):
             status = docker_build(image, dockerfile_ias, image_name, ias_3_name, ias_3_url)
             if not status:
                 return Response({"code": "91", "msg": "dockerfile生成失败"})
@@ -49,4 +53,4 @@ class IasPackage(APIView):
                 return Response({"code": "92", "msg": "算法启动失败, 端口被占用"})
             else:
                 return Response({"code": "92", "msg": "算法启动失败, 请确保镜像存在或者镜像名称正确"})
-        return Response({"code": "100", "msg": "封装IAS成功,可以直接调用IAS"})
+        return Response({"code": "100", "msg": "封装IAS成功,可以直接调用IAS", "container_id": res})

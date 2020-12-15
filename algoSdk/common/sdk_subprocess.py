@@ -7,17 +7,22 @@
 
 import subprocess
 
+
 def sdk_subprocess(cmd):
     """
     封装 subprocess 用来定制化返回消息
-    :param cmd:
-    :param msg:
-    :return:
+    :param cmd: 运行命令
+    :return: 返回命令运行结果以及状态码
     """
-    res_p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
-    stdout, stderr = res_p.communicate()
-    returncode = res_p.returncode
-    if returncode == 0:
+    try:
+        res_p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
+        stdout, stderr = res_p.communicate()
+    except:
+        # 部分镜像不兼容utf-8 报错使用如下格式
+        res_p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 encoding='unicode_escape')
+        stdout, stderr = res_p.communicate()
+    if res_p.returncode == 0:
         if stdout.endswith('\n'):
             return True, stdout.replace('\n', '')
         return True, stdout

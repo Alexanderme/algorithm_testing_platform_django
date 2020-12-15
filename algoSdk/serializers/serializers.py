@@ -10,13 +10,11 @@ from rest_framework import serializers
 class IasPackageSerializers(serializers.Serializer):
     image_name = serializers.CharField(max_length=512)
     port = serializers.IntegerField(min_value=10000, max_value=60000)
-    version = serializers.CharField(max_length=12)
 
 
 class VasPackageSerializers(serializers.Serializer):
     image_name = serializers.CharField(max_length=512)
     port = serializers.IntegerField(min_value=10000, max_value=60000)
-    version = serializers.CharField(max_length=12)
 
 
 class AlgoOpencvVersionSerializers(serializers.Serializer):
@@ -26,4 +24,15 @@ class AlgoOpencvVersionSerializers(serializers.Serializer):
 class AlgoResSerializer(serializers.Serializer):
     image_name = serializers.CharField(max_length=512)
     args = serializers.CharField(max_length=1024)
-    file_name = serializers.FileField(upload_to='upload')
+    file_name = serializers.FileField()
+
+class CeleryTaskSerializer(serializers.Serializer):
+    task_id = serializers.CharField(max_length=124)
+
+class FilesResultSerializer(serializers.Serializer):
+    files = serializers.FileField()
+
+class CleanEnvSerializer(serializers.Serializer):
+    container_id = serializers.CharField(max_length=124)
+    ori_files_dir = serializers.CharField(max_length=256)
+    res_files_dir = serializers.CharField(max_length=256)

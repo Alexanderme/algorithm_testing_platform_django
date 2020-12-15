@@ -141,5 +141,7 @@ CELERY_TIMEZONE = "Asia/Shanghai"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-# 用于存储算法运行文件路径
-Algo_Res_dir = os.path.join(BASE_DIR, "algoSdk/files/algoFilesdir")
+# 用于存储算法运行原始文件路径
+Algo_files_dir = os.path.join(BASE_DIR, "algoSdk/files/algoFilesdir")
+# 用于存储算法运行结果文件路径
+Algo_files_Res_dir = os.path.join(BASE_DIR, "algoSdk/files/algoFilesResdir")

@@ -4,16 +4,17 @@
     #  @Author: Ljx
     #  @Time: 2020/12/9 20:32
 """
+import base64
+import uuid
+
 from ..common.iter_files import iter_files
 from celery import shared_task
-from ..common.sdk_subprocess import sdk_subprocess
+import requests
 import os
-import time
-
 
 
 @shared_task
-def algo_ias_files(ori_files_dir, res_files_dir, file_name, port, args, random_str):
+def algo_ias_files(self, container_id, file_name, port, args):
     """
     后台进行 ias 运行算法得到结果
     :param args:
@@ -25,101 +26,77 @@ def algo_ias_files(ori_files_dir, res_files_dir, file_name, port, args, random_s
     :param port: 端口
     :return:
     """
-    # 解压文件
+    random_str = ''.join([each for each in str(uuid.uuid1()).split('-')])
+    parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # 创建临时存放运行文件文件夹 和 算法运行结果文件夹
+    ori_files_dir = os.path.join(parent_dir, f"files/algoFilesdir/ori_{random_str}")
+    res_files_dir = os.path.join(parent_dir, f"files/algoFileResdir/res_{random_str}")
+    if not os.path.exists(ori_files_dir) or not os.path.exists(res_files_dir):
+        os.makedirs(ori_files_dir)
+        os.makedirs(res_files_dir)
+    # 解压文件 删除下载文件
     os.system(f"unzip {file_name} -d {ori_files_dir}")
     os.system(f"rm -f {file_name}")
-    # 调用ias, image , video
+    # 返回文件列表
     filesname = iter_files(ori_files_dir)
     # 获取文件全路径列表
-    images_dir = filesname["image_dir"]
-    videos_dir = filesname["video_dir"]
+    files_with_dir = filesname["files"]
     err_files = filesname["err_file"]
-
-    file_nums = len(images_dir) + len(videos_dir) - len(err_files)
+    # 计算有效文件数目
+    file_nums = len(files_with_dir) - len(err_files)
+    # 初始化运行文件数目
     res_files_count = 0
-    cmd = "docker ps|grep %s|awk '{print $1}'" % port
-    status, res = sdk_subprocess(cmd)
-    time.sleep(5)
-    cmd = "docker ps|grep %s|awk '{print $1}'" % port
-    status, container_id = sdk_subprocess(cmd)
 
-    for image_dir in images_dir:
-        url = request_host_without_port + ":" + str(port) + "/api/analysisImage"
-        # 原文件名称 文件路径
-        file_dir, image = os.path.split(image_dir)
-        # 结果文件路径
-        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}")
-        res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
-        if not os.path.exists(res_file_dir):
-            os.makedirs(res_file_dir)
-        res_file_name = os.path.join(res_file_dir, image)
-        # 调用IAS
-        data = {
-            'image': (image, open(image_dir, 'rb')),
-            "args": args
-        }
-        try:
-            res_base64 = requests.post(url, files=data).json()
-            print(res_base64.get("code")==0)
-            if res_base64.get("code") != 0:
-                return {'current': 100, 'total': 100, 'status': 'faild', 'result': "-1", "error_files": err_files,"ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
-        except Exception as e:
-            res_base64 = {"code":-100}
-            return {'current': 100, 'total': 100, 'status': 'faild', 'result': "-100", "error_files": err_files,
-            "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
-        res = res_base64.get('buffer')
-        algo_res_json = res_base64.get("result")
-        res = base64.decodebytes(res.encode('ascii'))
-        with open(res_file_name, 'wb') as f:
-            f.write(res)
-        res_file_name = res_file_name.split('/')[-1]
-        with open(res_file_dir_txt, 'a') as f:
-            f.write(str(res_file_name) + '\n')
-            f.write(str(algo_res_json) + '\n')
-        res_files_count += 1
-        process = int((res_files_count / file_nums) * 100)
-        self.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
-
-    for video_dir in videos_dir:
-        url = request_host_without_port + ":" + str(port) + "/api/analysisVideo"
-        # 原文件名称 文件路径
-        file_dir, video = os.path.split(video_dir)
-        # 结果文件路径
-        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}")
-        res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
-        if not os.path.exists(res_file_dir):
-            os.makedirs(res_file_dir)
-        res_file_name = os.path.join(res_file_dir, video)
-        # 调用IAS
-        data = {
-            'video': (video, open(video_dir, 'rb')),
-            "args": args
-        }
-        try:
-            res_base64 = requests.post(url, files=data).json()
-            if res_base64.get("code") != 0:
-                return {'current': 100, 'total': 100, 'status': 'faild', 'result': "-1", "error_files": err_files,"ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
-        except Exception as e:
-            res_base64 = {"code":-100}
-            return {'current': 100, 'total': 100, 'status': 'faild', 'result': "-100", "error_files": err_files,
-            "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
-        res = res_base64.get('buffer')
-        algo_res_json = res_base64.get("result")
-        res = base64.decodebytes(res.encode('ascii'))
-        with open(res_file_name, 'wb') as f:
-            f.write(res)
-        res_file_name = res_file_name.split('/')[-1]
-        with open(res_file_dir_txt, 'a') as f:
-            f.write(str(res_file_name) + '\n')
-            f.write(str(algo_res_json) + '\n')
-        res_files_count += 1
-        process = int((res_files_count / file_nums) * 100)
-        self.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
-
-    # 打包下载结果
+    process = run_files(files_with_dir, random_str,  port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args)
+    self.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
+    # 打包
     os.system(f"cd {res_files_dir};tar -cvf result.tar *")
     store_path = f"{res_files_dir}/result.tar"
 
     return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': store_path, "error_files": err_files,
             "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
 
+
+def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args):
+    url_image = "http://127.0.0.1" + ":" + str(port) + "/api/analysisImage"
+    url_video = "http://127.0.0.1" + ":" + str(port) + "/api/analysisVideo"
+    for file_with_dir in files:
+        # 原文件名称 文件路径
+        file_dir, file = os.path.split(file_with_dir)
+        # 结果文件路径
+        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}")
+        res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
+        res_file_name = os.path.join(res_file_dir, file)
+        # 调用IAS
+        try:
+            if file.lower().endswith("avi") or file.lower().endswith("mp4") or file.lower().endswith("flv"):
+                data = {
+                    'video': (file, open(file_with_dir, 'rb')),
+                    "args": args
+                }
+                res_base64 = requests.post(url_image, files=data).json()
+            else:
+                data = {
+                    'image': (file, open(file_with_dir, 'rb')),
+                    "args": args
+                }
+                res_base64 = requests.post(url_video, files=data).json()
+        except:
+            return {'current': 100, 'total': 100, 'status': '算法调用失败', 'result': "-1", "error_files": err_files,
+                    "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
+        res = res_base64.get('buffer')
+        if res_base64.get("code") != 0:
+            return {'current': 100, 'total': 100, 'status': '算法调用结果异常', 'result': "-1", "error_files": err_files,
+                    "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
+
+        algo_res_json = res_base64.get("result")
+        res = base64.decodebytes(res.encode('ascii'))
+        with open(res_file_name, 'wb') as f:
+            f.write(res)
+        res_file_name = res_file_name.split('/')[-1]
+        with open(res_file_dir_txt, 'a') as f:
+            f.write(str(res_file_name) + '\n')
+            f.write(str(algo_res_json) + '\n')
+        res_files_count += 1
+        process = int((res_files_count / file_nums) * 100)
+        return process

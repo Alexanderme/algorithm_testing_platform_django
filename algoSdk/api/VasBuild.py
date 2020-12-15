@@ -19,6 +19,7 @@ from ..common.sdk_function import docker_build
 from ..common.sdk_function import docker_run_vas
 
 import os
+from ..common.sdk_requests import get_sdk_opencv_version
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -39,11 +40,14 @@ class VasPackage(APIView):
             return Response({"87": "参数错误"})
         image_name = obj.data.get("image_name")
         port = obj.data.get("port")
-        version = obj.data.get("version")
         dockerfile_vas = os.path.join(path, "utils/sdkPackage/Dockerfile_vas")
         image = image_name + "_test_vas"
+
+        opencv_version = get_sdk_opencv_version(image_name)
+        if not opencv_version:
+            return Response({"code": "95", "msg": "算法启动失败, 获取算法OpenCV失败"})
         # 封装镜像
-        if version == "3.4":
+        if opencv_version.startswith("3."):
             status = docker_build(image, dockerfile_vas, image_name, vas_3_name, vas_3_url)
             if not status:
                 return Response({"code": "91", "msg": "dockerfile生成失败"})
@@ -58,4 +62,4 @@ class VasPackage(APIView):
                 return Response({"code": "92", "msg": "算法启动失败, 端口被占用"})
             else:
                 return Response({"code": "92", "msg": "算法启动失败, 请确保镜像存在或者镜像名称正确"})
-        return Response({"code": "100", "msg": "封装VAS成功,可以直接调用VAS"})
+        return Response({"code": "100", "msg": "封装VAS成功,可以直接调用VAS", "container_id": res})

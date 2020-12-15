@@ -19,9 +19,9 @@ def iter_files(rootDir, *args, **kwargs):
             if kwargs["file_type"] == "algoRunRes":
                 file = os.path.join(root, file)
                 if file.lower().endswith("jpg") or file.lower().endswith("png") or file.lower().endswith("jpeg"):
-                    filenames["image_dir"].append(file)
+                    filenames["files"].append(file)
                 elif file.lower().endswith("avi") or file.lower().endswith("mp4") or file.lower().endswith("flv"):
-                    filenames["video_dir"].append(file)
+                    filenames["files"].append(file)
                 else:
                     filenames["error_file"].append(file)
             else:
