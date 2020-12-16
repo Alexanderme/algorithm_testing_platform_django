@@ -39,6 +39,7 @@ def algo_ias_files(self, container_id, file_name, port, args):
             os.makedirs(res_files_dir)
         except Exception as e:
             logging.error(e)
+            return False
     try:
         # 解压文件 删除下载文件
         os.system(f"unzip {file_name} -d {ori_files_dir}")
@@ -47,7 +48,7 @@ def algo_ias_files(self, container_id, file_name, port, args):
         logging.error(e)
         return False
     # 返回文件列表
-    filesname = iter_files(ori_files_dir)
+    filesname = iter_files(ori_files_dir, file_type="algoRunRes")
     # 获取文件全路径列表
     files_with_dir = filesname["files"]
     err_files = filesname["err_file"]
@@ -55,8 +56,11 @@ def algo_ias_files(self, container_id, file_name, port, args):
     file_nums = len(files_with_dir) - len(err_files)
     # 初始化运行文件数目
     res_files_count = 0
-
-    process = run_files(files_with_dir, random_str,  port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args)
+    try:
+        process = run_files(files_with_dir, random_str,  port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args)
+    except Exception as e:
+        logging.exception(e)
+        return False
     logging.info(process)
     self.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
     # 打包
@@ -95,15 +99,21 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
                     "args": args
                 }
                 res_base64 = requests.post(url_video, files=data).json()
-        except:
+        except Exception as e:
+            logging.exception(e)
             return {'current': 100, 'total': 100, 'status': '算法调用失败', 'result': "-1", "error_files": err_files,
                     "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
         res = res_base64.get('buffer')
         if res_base64.get("code") != 0:
+            logging.exception(res)
             return {'current': 100, 'total': 100, 'status': '算法调用结果异常', 'result': "-1", "error_files": err_files,
                     "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
-
-        algo_res_json = res_base64.get("result")
+        try:
+            algo_res_json = res_base64.get("result")
+        except Exception as e:
+            logging.exception(e)
+            return {'current': 100, 'total': 100, 'status': '获取算法json结果失败', 'result': "-1", "error_files": err_files,
+                    "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
         res = base64.decodebytes(res.encode('ascii'))
         with open(res_file_name, 'wb') as f:
             f.write(res)

@@ -151,6 +151,7 @@ def grep_opencv_version(image):
     if "No such file or directory" not in res_p:
         errmsg.update({"sdk_version": "算法SDK版本为3.0系列 配置路径为:/usr/local/ev_sdk/config/algo_config.json \n"})
     else:
+        logging.exception(res_p)
         return False, "算法SDK版本为2.0系列 不输出内容"
 
     auth_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/3rd/license/lib/pkgconfig/ji_license.pc |grep -i version'"
@@ -158,6 +159,7 @@ def grep_opencv_version(image):
     if not res.startswith("cat"):
         errmsg.update({"sdk_authorization": "当前默认应该使用最新的版本库20.1.3, 当前算法授权库版本为" + res})
     else:
+        logging.exception(res)
         errmsg.update({"sdk_authorization": "获取授权信息失败, 授权库不是最新的20.1.3"})
 
     # 公私钥  配置文件 查看

@@ -25,6 +25,7 @@ def iter_files(rootDir, *args, **kwargs):
                 else:
                     filenames["error_file"].append(file)
             else:
+                # 如果存在其他的类型需要时候在定义
                 pass
         for dir in dirs:
             iter_files(dir)

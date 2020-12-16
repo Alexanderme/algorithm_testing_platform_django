@@ -5,8 +5,10 @@
     #  @Time: 2020/12/10 19:56
 """
 import os
-
+import logging
 from django.http import StreamingHttpResponse
+
+logger = logging.getLogger(__name__)
 
 
 def upload_file(requests, save_dir):
@@ -17,6 +19,7 @@ def upload_file(requests, save_dir):
     File = requests.FILES.get('file_name')
     file_with_dir = os.path.join(save_dir, File.name)
     if File is None:
+        logging.exception(File)
         return False
     else:
         with open(file_with_dir, 'wb+') as f:

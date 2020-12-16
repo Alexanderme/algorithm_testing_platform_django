@@ -33,6 +33,7 @@ class IasPackage(APIView):
         data = requests.data
         serializer = IasPackageSerializers(data=data)
         if not serializer.is_valid():
+            logging.exception(serializer)
             return Response({"87": "参数错误"})
         image_name = serializer.data.get("image_name")
         port = serializer.data.get("port")
@@ -56,7 +57,9 @@ class IasPackage(APIView):
         status, res = docker_run_ias(image, port)
         if not status:
             if "port is already" in res:
+                logging.exception(res)
                 return Response({"code": "90", "msg": "算法启动失败, 端口被占用"})
             else:
+                logging.exception(res)
                 return Response({"code": "90", "msg": "算法启动失败, 请确保镜像存在或者镜像名称正确"})
         return Response({"code": "100", "msg": "封装IAS成功,可以直接调用IAS", "container_id": res})

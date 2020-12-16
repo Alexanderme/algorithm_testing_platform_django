@@ -6,7 +6,9 @@
 """
 
 import subprocess
+import logging
 
+logger = logging.getLogger(__name__)
 
 def sdk_subprocess(cmd):
     """
@@ -17,7 +19,8 @@ def sdk_subprocess(cmd):
     try:
         res_p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
         stdout, stderr = res_p.communicate()
-    except:
+    except Exception as e:
+        logging.exception(e)
         # 部分镜像不兼容utf-8 报错使用如下格式
         res_p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                  encoding='unicode_escape')
@@ -27,4 +30,5 @@ def sdk_subprocess(cmd):
             return True, stdout.replace('\n', '')
         return True, stdout
     else:
+        logging.exception(e)
         return False, stderr

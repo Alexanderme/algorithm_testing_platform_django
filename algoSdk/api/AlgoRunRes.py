@@ -22,6 +22,7 @@ class AlgoRes(APIView):
         data = requests.data
         obj = AlgoResSerializer(data=data)
         if not obj.is_valid():
+            logging.exception(obj)
             return Response({"87": "参数错误"})
         image_name = obj.data.get('image_name')
         args = obj.data.get('args')
@@ -41,12 +42,14 @@ class AlgoRes(APIView):
         if not status:
             logging.exception(container_id)
             return Response({"code": "90", "msg": "封装ias失败"})
-
-        task = algo_ias_files(container_id, Algo_files_dir, Algo_files_Res_dir, file_name, port, args)
-        if not task:
-            logging.exception(task)
-            return Response({"code": "90", "msg": "获取任务id失败", "task_id": task})
-
+        try:
+            task = algo_ias_files(container_id, Algo_files_dir, Algo_files_Res_dir, file_name, port, args)
+            if not task:
+                logging.exception(task)
+                return Response({"code": "90", "msg": "获取任务id失败", "task_id": task})
+        except Exception as e:
+            logging.exception(e)
+            return Response({"code": "90", "msg": "获取任务id失败"})
         return Response({"code": "100", "msg": "celery任务启动成功", "task_id": task.id})
 
 

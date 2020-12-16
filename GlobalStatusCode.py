@@ -35,3 +35,10 @@ def algo_error():
 
 def upload_downfile_error():
     return '96', '文件操作相关失败'
+
+def celery_error():
+    return '95', '异步任务相关失败'
+
+
+def env_error():
+    return '97', '系统环境处理相关失败'

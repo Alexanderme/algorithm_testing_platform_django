@@ -40,13 +40,17 @@ class VasPackage(APIView):
         data = requests.data
         obj = VasPackageSerializers(data=data)
         if not obj.is_valid():
+            logging.exception(obj)
             return Response({"87": "参数错误"})
         image_name = obj.data.get("image_name")
         port = obj.data.get("port")
         dockerfile_vas = os.path.join(path, "utils/sdkPackage/Dockerfile_vas")
         image = image_name + "_test_vas"
-
-        opencv_version = get_sdk_opencv_version(image_name)
+        try:
+            opencv_version = get_sdk_opencv_version(image_name)
+        except Exception as e:
+            logging.exception(e)
+            return Response({"code": "90", "msg": "获取镜像版本失败"})
         if not opencv_version:
             logging.exception(opencv_version)
             return Response({"code": "90", "msg": "算法启动失败, 获取算法OpenCV失败"})
@@ -63,7 +67,9 @@ class VasPackage(APIView):
         status, res = docker_run_vas(image, port)
         if not status:
             if "port is already" in res:
+                logging.exception(res)
                 return Response({"code": "90", "msg": "算法启动失败, 端口被占用"})
             else:
+                logging.exception(res)
                 return Response({"code": "90", "msg": "算法启动失败, 请确保镜像存在或者镜像名称正确"})
         return Response({"code": "100", "msg": "封装VAS成功,可以直接调用VAS", "container_id": res})
