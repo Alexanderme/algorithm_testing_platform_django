@@ -19,7 +19,10 @@ from ..common.sdk_function import docker_build
 from ..common.sdk_function import docker_run_vas
 
 import os
+import logging
 from ..common.sdk_requests import get_sdk_opencv_version
+
+logger = logging.getLogger(__name__)
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -45,21 +48,22 @@ class VasPackage(APIView):
 
         opencv_version = get_sdk_opencv_version(image_name)
         if not opencv_version:
-            return Response({"code": "95", "msg": "算法启动失败, 获取算法OpenCV失败"})
+            logging.exception(opencv_version)
+            return Response({"code": "90", "msg": "算法启动失败, 获取算法OpenCV失败"})
         # 封装镜像
         if opencv_version.startswith("3."):
             status = docker_build(image, dockerfile_vas, image_name, vas_3_name, vas_3_url)
             if not status:
-                return Response({"code": "91", "msg": "dockerfile生成失败"})
+                return Response({"code": "90", "msg": "dockerfile生成失败"})
         else:
             status = docker_build(image, dockerfile_vas, image_name, vas_4_name, vas_4_url)
             if not status:
-                return Response({"code": "91", "msg": "dockerfile生成失败"})
+                return Response({"code": "90", "msg": "dockerfile生成失败"})
         # 运行镜像
         status, res = docker_run_vas(image, port)
         if not status:
             if "port is already" in res:
-                return Response({"code": "92", "msg": "算法启动失败, 端口被占用"})
+                return Response({"code": "90", "msg": "算法启动失败, 端口被占用"})
             else:
-                return Response({"code": "92", "msg": "算法启动失败, 请确保镜像存在或者镜像名称正确"})
+                return Response({"code": "90", "msg": "算法启动失败, 请确保镜像存在或者镜像名称正确"})
         return Response({"code": "100", "msg": "封装VAS成功,可以直接调用VAS", "container_id": res})

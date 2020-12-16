@@ -6,12 +6,14 @@
 """
 import base64
 import uuid
-
-from ..common.iter_files import iter_files
 from celery import shared_task
+import logging
 import requests
 import os
 
+from ..common.iter_files import iter_files
+
+logger = logging.getLogger(__name__)
 
 @shared_task
 def algo_ias_files(self, container_id, file_name, port, args):
@@ -32,11 +34,18 @@ def algo_ias_files(self, container_id, file_name, port, args):
     ori_files_dir = os.path.join(parent_dir, f"files/algoFilesdir/ori_{random_str}")
     res_files_dir = os.path.join(parent_dir, f"files/algoFileResdir/res_{random_str}")
     if not os.path.exists(ori_files_dir) or not os.path.exists(res_files_dir):
-        os.makedirs(ori_files_dir)
-        os.makedirs(res_files_dir)
-    # 解压文件 删除下载文件
-    os.system(f"unzip {file_name} -d {ori_files_dir}")
-    os.system(f"rm -f {file_name}")
+        try:
+            os.makedirs(ori_files_dir)
+            os.makedirs(res_files_dir)
+        except Exception as e:
+            logging.error(e)
+    try:
+        # 解压文件 删除下载文件
+        os.system(f"unzip {file_name} -d {ori_files_dir}")
+        os.system(f"rm -f {file_name}")
+    except Exception as e:
+        logging.error(e)
+        return False
     # 返回文件列表
     filesname = iter_files(ori_files_dir)
     # 获取文件全路径列表
@@ -48,10 +57,15 @@ def algo_ias_files(self, container_id, file_name, port, args):
     res_files_count = 0
 
     process = run_files(files_with_dir, random_str,  port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args)
+    logging.info(process)
     self.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
     # 打包
-    os.system(f"cd {res_files_dir};tar -cvf result.tar *")
-    store_path = f"{res_files_dir}/result.tar"
+    try:
+        os.system(f"cd {res_files_dir};tar -cvf result.tar *")
+        store_path = f"{res_files_dir}/result.tar"
+    except Exception as e:
+        logging.error(e)
+        return False
 
     return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': store_path, "error_files": err_files,
             "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}

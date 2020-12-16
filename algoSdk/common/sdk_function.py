@@ -8,6 +8,9 @@
 from .sdk_subprocess import sdk_subprocess
 import re
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 """
@@ -27,8 +30,9 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
     """
     docker_build = f"docker build -t {image_build_name} --build-arg IMAGE_NAME={image_name} " \
                    f"--build-arg PACKAGE_NAME={package_name} --build-arg PACKAGE_URL={package_url} -f {dockerfile_name} ."
-    status, _ = sdk_subprocess(docker_build)
+    status, res = sdk_subprocess(docker_build)
     if not status:
+        logging.exception(res)
         return False
     return status
 
@@ -38,6 +42,7 @@ def docker_run_sdk(image_name):
                  f"NVIDIA_VISIBLE_DEVICES=0 --rm {image_name}"
     status, res = sdk_subprocess(docker_run)
     if not status:
+        logging.exception(res)
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
@@ -45,10 +50,12 @@ def docker_run_sdk(image_name):
     docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
+        logging.exception(res)
         return False, res
     ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh"
     status, res = sdk_subprocess(ias_install)
     if not status:
+        logging.exception(res)
         return False, res
     return True, container_id
 
@@ -62,6 +69,7 @@ def docker_run_ias(image_name, port=None):
                      f"NVIDIA_VISIBLE_DEVICES=0 --rm -p {port}:80 {image_name}"
     status, res = sdk_subprocess(docker_run)
     if not status:
+        logging.exception(res)
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
@@ -69,10 +77,12 @@ def docker_run_ias(image_name, port=None):
     docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
+        logging.exception(res)
         return False, res
     ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh"
     status, res = sdk_subprocess(ias_install)
     if not status:
+        logging.exception(res)
         return False, res
     return True, container_id
 
@@ -86,6 +96,7 @@ def docker_run_vas(image_name, port=None):
                      f"NVIDIA_VISIBLE_DEVICES=0 --rm -p {port}:10000 {image_name}"
     status, res = sdk_subprocess(docker_run)
     if not status:
+        logging.exception(res)
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
@@ -93,12 +104,14 @@ def docker_run_vas(image_name, port=None):
     docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
+        logging.exception(res)
         return False, res
     # 负责运行文件到容器
     run_file = os.path.join(path, "utils/sdkAuthorization/run.conf")
     docker_authorization = f"docker cp {run_file} {container_id}:/usr/local/vas"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
+        logging.exception(res)
         return False, res
     vas_install = f"docker exec  {container_id} bash /root/give_license_vas.sh &"
     os.popen(vas_install)
@@ -107,23 +120,28 @@ def docker_run_vas(image_name, port=None):
 
 def grep_opencv_version(image):
     errmsg = {}
-
     status, container_id = docker_run_sdk(image)
     if not status:
+        logging.exception(container_id)
         return False, "sdk算法启动失败"
     grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
-                  "grep 'opencv.*4\.[0-9]'|awk 'END{print $1}'\""
+                  "grep 'opencv.*3\.[0-9]'|awk 'END{print $1}'\""
     status, opencv_version = sdk_subprocess(grep_opencv)
-    if not status:
-        errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
     try:
         pattern_3 = ".*?(3.\d)"
         opencv_version = re.findall(pattern_3, opencv_version)[0]
+        if not status:
+            logging.exception(opencv_version)
+            errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
         errmsg.update({"OpenCV_version": opencv_version})
-    except:
+    except Exception as e:
+        logger.exception(e)
         grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
-                  "grep 'opencv.*3\.[0-9]'|awk 'END{print $1}'\""
+                  "grep 'opencv.*4\.[0-9]'|awk 'END{print $1}'\""
         status, opencv_version = sdk_subprocess(grep_opencv)
+        if not status:
+            logging.exception(opencv_version)
+            errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
         pattern_4 = ".*?(4.\d)"
         opencv_version = re.findall(pattern_4, opencv_version)[0]
         errmsg.update({"OpenCV_version": opencv_version})
@@ -146,6 +164,7 @@ def grep_opencv_version(image):
     privateKey = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
     status, privateKey = sdk_subprocess(privateKey)
     if not status:
+        logging.exception(privateKey)
         errmsg.update({"privateKey": "获取获取失败"})
     if privateKey == "":
         errmsg.update({"Sdk_version": 2.5})
@@ -155,6 +174,7 @@ def grep_opencv_version(image):
     algo_config = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/config/algo_config.json'"
     status, algo_config = sdk_subprocess(algo_config)
     if not status:
+        logging.exception(algo_config)
         errmsg.update({"algo_config": "获取获取配置失败"})
     errmsg.update({"algo_config": algo_config})
     if opencv_version.startswith("3."):
@@ -162,6 +182,7 @@ def grep_opencv_version(image):
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
+            logging.exception(res)
             errmsg.update({"stop_container": "停用容器失败"})
         return True, errmsg
     elif opencv_version.startswith("4."):
@@ -169,14 +190,17 @@ def grep_opencv_version(image):
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
+            logging.exception(res)
             errmsg.update({"stop_container": "停用容器失败"})
     else:
         errmsg.update({"algo_message": '当前OpenCV版本为: 获取失败'})
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
+            logging.exception(res)
             errmsg.update({"stop_container": "停用容器失败"})
     errmsg.update({"code": "100"})
+    logging.info(errmsg)
     return True, errmsg
 
 

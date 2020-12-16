@@ -30,13 +30,8 @@ def parameter_is_exist():
     return '88', '数据已存在'
 
 
-def dockerfile_error():
-    return '91', 'dockerfile生成失败'
+def algo_error():
+    return '90', '算法相关失败'
 
-
-def docker_run_faild():
-    return '92', '算法启动失败'
-
-
-def parameter_wrong():
-    return '87', '参数错误'
+def upload_downfile_error():
+    return '96', '文件操作相关失败'

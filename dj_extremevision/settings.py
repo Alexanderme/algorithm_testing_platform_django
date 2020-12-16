@@ -24,6 +24,50 @@ SECRET_KEY = '^$wvdza05)d#a)_xpr6@&r^hr*yu4+ckvz-c=8o7fm=8!fi(o6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s,%(process)d,%(name)s,%(levelname)s,%(filename)s:%(lineno)d,%(message)s'
+        },
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+            # 'filters': ['special'],
+        },
+        'default': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(os.path.curdir, 'all.log'),
+            'maxBytes': 1024 * 1024 * 50,  # 50 MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['default', 'console'] if DEBUG else ["default"],
+            'level': 'ERROR',
+            'propagate': False
+        },
+        '': {
+            'handlers': ['default', 'console'] if DEBUG else ["default"],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+    }
+}
 
 ALLOWED_HOSTS = ['*']
 

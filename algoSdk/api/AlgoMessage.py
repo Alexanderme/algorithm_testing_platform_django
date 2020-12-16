@@ -6,10 +6,12 @@
 """
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import logging
 
 from ..common.sdk_function import grep_opencv_version
 from ..serializers.serializers import AlgoOpencvVersionSerializers
 
+logger = logging.getLogger(__name__)
 
 class AlgoOpencvVersion(APIView):
     def post(self, requests, *args, **kwargs):
@@ -21,7 +23,7 @@ class AlgoOpencvVersion(APIView):
         # 运行镜像 获取算法相关信息
         status, open_cv_version = grep_opencv_version(image_name)
         if not status:
-            return Response({"code": "92", "msg": open_cv_version})
+            return Response({"code": "90", "msg": open_cv_version})
         return Response(open_cv_version)
 
 
