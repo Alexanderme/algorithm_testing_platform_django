@@ -16,7 +16,7 @@ from ..common.iter_files import iter_files
 logger = logging.getLogger(__name__)
 
 @shared_task
-def algo_ias_files(self, container_id, file_name, port, args):
+def algo_ias_files(container_id, file_name, port, args):
     """
     后台进行 ias 运行算法得到结果
     :param args:
@@ -62,7 +62,7 @@ def algo_ias_files(self, container_id, file_name, port, args):
         logging.exception(e)
         return False
     logging.info(process)
-    self.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
+    algo_ias_files.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
     # 打包
     try:
         os.system(f"cd {res_files_dir};tar -cvf result.tar *")

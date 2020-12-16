@@ -200,7 +200,6 @@ def grep_opencv_version(image):
             logging.exception(res)
             errmsg.update({"stop_container": "停用容器失败"})
     errmsg.update({"code": "100"})
-    logging.info(errmsg)
     return True, errmsg
 
 
