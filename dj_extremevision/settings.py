@@ -44,7 +44,7 @@ LOGGING = {
         'default': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(os.path.curdir, 'all.log'),
+            'filename': os.path.join(os.path.curdir, 'algoSdk/ApiDoc/all.log'),
             'maxBytes': 1024 * 1024 * 50,  # 50 MB
             'backupCount': 5,
             'formatter': 'standard',
@@ -170,6 +170,37 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# 跨域忽略
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    '*'
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+)
+
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+)
 
 #celery peiz1
 
