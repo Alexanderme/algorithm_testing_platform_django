@@ -145,7 +145,6 @@ def grep_opencv_version(image):
         pattern_4 = ".*?(4.\d)"
         opencv_version = re.findall(pattern_4, opencv_version)[0]
         errmsg.update({"OpenCV_version": opencv_version})
-    errmsg.update({"OpenCV_version": opencv_version})
     sdk_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
     status, res_p = sdk_subprocess(sdk_message)
     if "No such file or directory" not in res_p:
@@ -187,15 +186,8 @@ def grep_opencv_version(image):
             logging.exception(res)
             errmsg.update({"stop_container": "停用容器失败"})
         return True, errmsg
-    elif opencv_version.startswith("4."):
-        errmsg.update({"algo_message": '当前OpenCV版本为:4.1, vas安装包:vas_v4.3_cv4.1.tar.gz, ias安装包:ias_v4.74_cv4.1.tar.gz'})
-        stop = f"docker stop {container_id}"
-        status, res = sdk_subprocess(stop)
-        if not status:
-            logging.exception(res)
-            errmsg.update({"stop_container": "停用容器失败"})
     else:
-        errmsg.update({"algo_message": '当前OpenCV版本为: 获取失败'})
+        errmsg.update({"algo_message": '当前OpenCV版本为:4.1, vas安装包:vas_v4.3_cv4.1.tar.gz, ias安装包:ias_v4.74_cv4.1.tar.gz'})
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
