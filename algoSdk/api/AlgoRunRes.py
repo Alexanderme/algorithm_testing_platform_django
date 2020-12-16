@@ -9,10 +9,10 @@ from rest_framework.views import APIView
 import random
 import logging
 
-from ..celery_tasks.algo_res_task import algo_ias_files
+from algoSdk.tasks import algo_ias_files
 from ..serializers.serializers import AlgoResSerializer
 from ..common.upload_download_file import upload_file
-from dj_extremevision.settings import Algo_files_Res_dir, Algo_files_dir
+from dj_extremevision.settings import Algo_files_dir
 from ..common.sdk_requests import ias_packing, get_sdk_opencv_version
 
 logger = logging.getLogger(__name__)

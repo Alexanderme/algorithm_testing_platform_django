@@ -8,7 +8,7 @@ import logging
 from rest_framework.response import Response
 from ..serializers.serializers import CeleryTaskSerializer, FilesResultSerializer, CleanEnvSerializer
 from rest_framework.views import APIView
-from ..celery_tasks.algo_res_task import algo_ias_files
+from algoSdk.tasks import algo_ias_files
 from ..common.upload_download_file import download_file
 from ..common.sdk_function import clean_env
 

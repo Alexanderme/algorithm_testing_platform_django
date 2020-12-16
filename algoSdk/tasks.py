@@ -11,7 +11,7 @@ import logging
 import requests
 import os
 
-from ..common.iter_files import iter_files
+from algoSdk.common.iter_files import iter_files
 
 logger = logging.getLogger(__name__)
 

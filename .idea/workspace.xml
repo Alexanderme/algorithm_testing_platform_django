@@ -4,9 +4,8 @@
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/celery_tasks/algo_res_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/celery_tasks/algo_res_task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/celery_tasks/algo_res_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +42,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk" />
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\celery_tasks" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_authorization" />
-      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision" />
-      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\common" />
     </key>
   </component>
@@ -159,7 +158,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606958378901</updated>
       <workItem from="1606958379990" duration="52350000" />
-      <workItem from="1607598262372" duration="53198000" />
+      <workItem from="1607598262372" duration="54476000" />
     </task>
     <servers />
   </component>
