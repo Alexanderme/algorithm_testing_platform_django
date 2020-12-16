@@ -185,9 +185,15 @@ def grep_opencv_version(image):
         if not status:
             logging.exception(res)
             errmsg.update({"stop_container": "停用容器失败"})
-        return True, errmsg
-    else:
+    elif opencv_version.startswith("4."):
         errmsg.update({"algo_message": '当前OpenCV版本为:4.1, vas安装包:vas_v4.3_cv4.1.tar.gz, ias安装包:ias_v4.74_cv4.1.tar.gz'})
+        stop = f"docker stop {container_id}"
+        status, res = sdk_subprocess(stop)
+        if not status:
+            logging.exception(res)
+            errmsg.update({"stop_container": "停用容器失败"})
+    else:
+        errmsg.update({"algo_message": '当前OpenCV版本为: 获取失败'})
         stop = f"docker stop {container_id}"
         status, res = sdk_subprocess(stop)
         if not status:
