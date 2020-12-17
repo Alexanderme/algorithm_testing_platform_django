@@ -10,7 +10,8 @@ from .api.IasBuild import IasPackage
 from .api.VasBuild import VasPackage
 from .api.AlgoMessage import AlgoOpencvVersion
 from .api.AlgoRunRes import AlgoRes
-from .api.CeleryTask import TaskStatus
+from .api.CeleryTask import TaskStatus, FilesResult, CleanEvn
+from .api.CeleryTask import FilesResult
 
 
 urlpatterns = [
@@ -19,4 +20,6 @@ urlpatterns = [
     url(r'sdk/algoMessage', AlgoOpencvVersion.as_view()),
     url(r'sdk/algoRes', AlgoRes.as_view()),
     url(r'sdk/taskInfo', TaskStatus.as_view()),
+    url(r'sdk/fileResult', FilesResult.as_view()),
+    url(r'sdk/cleanEnv', CleanEvn.as_view()),
 ]

@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/utils/sdkPackage/Dockerfile_ias" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/utils/sdkPackage/Dockerfile_ias" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/utils/sdkPackage/Dockerfile_vas" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/utils/sdkPackage/Dockerfile_vas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +183,7 @@
       <updated>1606958378901</updated>
       <workItem from="1606958379990" duration="52350000" />
       <workItem from="1607598262372" duration="54476000" />
-      <workItem from="1608116937080" duration="8283000" />
+      <workItem from="1608116937080" duration="15518000" />
     </task>
     <servers />
   </component>

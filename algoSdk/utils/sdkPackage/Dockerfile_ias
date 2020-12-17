@@ -2,6 +2,7 @@ ARG IMAGE_NAME
 FROM $IMAGE_NAME
 ARG PACKAGE_NAME
 ARG PACKAGE_URL
+ENV NVIDIA_VISIBLE_DEVICES all
 RUN cd /usr/local/ev_sdk \
         && rm -f `find /usr/local/ev_sdk/src/ -type f | grep -iv  py`\
         && rm -rf /usr/local/ev_sdk/README.md \
