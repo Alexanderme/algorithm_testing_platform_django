@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +179,7 @@
       <updated>1606958378901</updated>
       <workItem from="1606958379990" duration="52350000" />
       <workItem from="1607598262372" duration="54476000" />
-      <workItem from="1608116937080" duration="6209000" />
+      <workItem from="1608116937080" duration="8283000" />
     </task>
     <servers />
   </component>
@@ -212,10 +211,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="461" y="156" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607599605153" />
-    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608105246406">
+    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608177759160">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608105246406" />
+    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608177759160" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1607679776230">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
