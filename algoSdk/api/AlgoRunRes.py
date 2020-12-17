@@ -43,7 +43,7 @@ class AlgoRes(APIView):
             logging.exception(container_id)
             return Response({"code": "90", "msg": "封装ias失败"})
         try:
-            task = algo_ias_files(container_id, file_name, port, args)
+            task = algo_ias_files.delay(container_id, file_name, port, args)
             if not task:
                 logging.exception(task)
                 return Response({"code": "90", "msg": "获取任务id失败", "task_id": task})

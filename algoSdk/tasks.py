@@ -29,7 +29,7 @@ def algo_ias_files(container_id, file_name, port, args):
     :return:
     """
     random_str = ''.join([each for each in str(uuid.uuid1()).split('-')])
-    parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    parent_dir = os.path.dirname(os.path.abspath(__file__))
     # 创建临时存放运行文件文件夹 和 算法运行结果文件夹
     ori_files_dir = os.path.join(parent_dir, f"files/algoFilesdir/ori_{random_str}")
     res_files_dir = os.path.join(parent_dir, f"files/algoFileResdir/res_{random_str}")
@@ -85,6 +85,7 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
         res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}")
         res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
         res_file_name = os.path.join(res_file_dir, file)
+        print(url_image)
         # 调用IAS
         try:
             if file.lower().endswith("avi") or file.lower().endswith("mp4") or file.lower().endswith("flv"):
@@ -92,13 +93,17 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
                     'video': (file, open(file_with_dir, 'rb')),
                     "args": args
                 }
-                res_base64 = requests.post(url_image, files=data).json()
+                res_base64 = requests.post(url_video, files=data).json()
+                print("----------------------------------")
+                print(res_base64)
             else:
                 data = {
                     'image': (file, open(file_with_dir, 'rb')),
                     "args": args
                 }
-                res_base64 = requests.post(url_video, files=data).json()
+                res_base64 = requests.post(url_image, files=data).json()
+                print("----------------------------------")
+                print(res_base64)
         except Exception as e:
             logging.exception(e)
             return {'current': 100, 'total': 100, 'status': '算法调用失败', 'result': "-1", "error_files": err_files,
