@@ -30,7 +30,7 @@ class CeleryTaskSerializer(serializers.Serializer):
     task_id = serializers.CharField(max_length=124)
 
 class FilesResultSerializer(serializers.Serializer):
-    files = serializers.FileField()
+    files = serializers.CharField(max_length=256)
 
 class CleanEnvSerializer(serializers.Serializer):
     container_id = serializers.CharField(max_length=124)

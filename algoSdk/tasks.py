@@ -10,6 +10,7 @@ from celery import shared_task
 import logging
 import requests
 import os
+import time
 
 from algoSdk.common.iter_files import iter_files
 
@@ -28,6 +29,8 @@ def algo_ias_files(container_id, file_name, port, args):
     :param port: 端口
     :return:
     """
+    url_image = "http://127.0.0.1" + ":" + str(port) + "/api/analysisImage"
+    url_video = "http://127.0.0.1" + ":" + str(port) + "/api/analysisVideo"
     random_str = ''.join([each for each in str(uuid.uuid1()).split('-')])
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     # 创建临时存放运行文件文件夹 和 算法运行结果文件夹
@@ -56,33 +59,12 @@ def algo_ias_files(container_id, file_name, port, args):
     file_nums = len(files_with_dir) - len(err_files)
     # 初始化运行文件数目
     res_files_count = 0
-    try:
-        process = run_files(files_with_dir, random_str,  port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args)
-    except Exception as e:
-        logging.exception(e)
-        return False
-    logging.info(process)
-    algo_ias_files.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
-    # 打包
-    try:
-        os.system(f"cd {res_files_dir};tar -cvf result.tar *")
-        store_path = f"{res_files_dir}/result.tar"
-    except Exception as e:
-        logging.error(e)
-        return False
-
-    return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': store_path, "error_files": err_files,
-            "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
-
-
-def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, container_id, res_files_count, file_nums, args):
-    url_image = "http://127.0.0.1" + ":" + str(port) + "/api/analysisImage"
-    url_video = "http://127.0.0.1" + ":" + str(port) + "/api/analysisVideo"
-    for file_with_dir in files:
+    for file_with_dir in files_with_dir:
         # 原文件名称 文件路径
         file_dir, file = os.path.split(file_with_dir)
         # 结果文件路径
-        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}").replace("algoFilesdir", "algoFileResdir")
+        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}").replace("algoFilesdir",
+                                                                                          "algoFileResdir")
         res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
         res_file_name = os.path.join(res_file_dir, file)
         # 调用IAS
@@ -93,14 +75,12 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
                     "args": args
                 }
                 res_base64 = requests.post(url_video, files=data).json()
-                print("----------------------------------")
             else:
                 data = {
                     'image': (file, open(file_with_dir, 'rb')),
                     "args": args
                 }
                 res_base64 = requests.post(url_image, files=data).json()
-                print("----------------------------------")
         except Exception as e:
             logging.exception(e)
             return {'current': 100, 'total': 100, 'status': '算法调用失败', 'result': "-1", "error_files": err_files,
@@ -114,7 +94,8 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
             algo_res_json = res_base64.get("result")
         except Exception as e:
             logging.exception(e)
-            return {'current': 100, 'total': 100, 'status': '获取算法json结果失败', 'result': "-1", "error_files": err_files,
+            return {'current': 100, 'total': 100, 'status': '获取算法json结果失败', 'result': "-1",
+                    "error_files": err_files,
                     "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
         res = base64.decodebytes(res.encode('ascii'))
         with open(res_file_name, 'wb') as f:
@@ -125,4 +106,13 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
             f.write(str(algo_res_json) + '\n')
         res_files_count += 1
         process = int((res_files_count / file_nums) * 100)
-        return process
+    algo_ias_files.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
+    # 打包
+    try:
+        os.system(f"cd {res_files_dir};tar -cvf result.tar *")
+        store_path = f"{res_files_dir}/result.tar"
+    except Exception as e:
+        logging.error(e)
+        return False
+    return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': store_path, "error_files": err_files,
+            "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}

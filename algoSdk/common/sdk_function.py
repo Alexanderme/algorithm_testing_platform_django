@@ -81,12 +81,11 @@ def docker_run_ias(image_name, port=None):
         logging.exception(res)
         return False, res
     ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh &"
-    subprocess.Popen(ias_install, shell=True)
     # 因为存在等待信息返回的一个状态 ,部分服务器会一直等待请求返回结果  先用上面的尝试
-    # status, res = sdk_subprocess(ias_install)
-    # if not status:
-    #     logging.exception(res)
-    #     return False, res
+    status, res = sdk_subprocess(ias_install, timeout=15)
+    if not status:
+        logging.exception(res)
+        return False, res
     return True, container_id
 
 
