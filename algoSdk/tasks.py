@@ -82,10 +82,9 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
         # 原文件名称 文件路径
         file_dir, file = os.path.split(file_with_dir)
         # 结果文件路径
-        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}")
+        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}").replace("algoFilesdir", "algoFileResdir")
         res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
         res_file_name = os.path.join(res_file_dir, file)
-        print(url_image)
         # 调用IAS
         try:
             if file.lower().endswith("avi") or file.lower().endswith("mp4") or file.lower().endswith("flv"):
@@ -95,7 +94,6 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
                 }
                 res_base64 = requests.post(url_video, files=data).json()
                 print("----------------------------------")
-                print(res_base64)
             else:
                 data = {
                     'image': (file, open(file_with_dir, 'rb')),
@@ -103,7 +101,6 @@ def run_files(files, random_str, port, ori_files_dir, res_files_dir, err_files, 
                 }
                 res_base64 = requests.post(url_image, files=data).json()
                 print("----------------------------------")
-                print(res_base64)
         except Exception as e:
             logging.exception(e)
             return {'current': 100, 'total': 100, 'status': '算法调用失败', 'result': "-1", "error_files": err_files,
