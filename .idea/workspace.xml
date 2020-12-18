@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/git_license_sdk.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/give_license_ias.sh" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/give_license_ias.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

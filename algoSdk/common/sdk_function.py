@@ -47,7 +47,7 @@ def docker_run_sdk(image_name):
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
-    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
+    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_sdk.sh")
     docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
@@ -82,7 +82,7 @@ def docker_run_ias(image_name, port=None):
         return False, res
     ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh &"
     # 因为存在等待信息返回的一个状态 ,部分服务器会一直等待请求返回结果  先用上面的尝试
-    status, res = sdk_subprocess(ias_install, timeout=15)
+    status, res = sdk_subprocess(ias_install)
     if not status:
         logging.exception(res)
         return False, res
