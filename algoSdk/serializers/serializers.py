@@ -34,5 +34,5 @@ class FilesResultSerializer(serializers.Serializer):
 
 class CleanEnvSerializer(serializers.Serializer):
     container_id = serializers.CharField(max_length=124)
-    ori_files_dir = serializers.CharField(max_length=256)
-    res_files_dir = serializers.CharField(max_length=256)
+    ori_files_dir = serializers.CharField(max_length=512)
+    res_files_dir = serializers.CharField(max_length=512)

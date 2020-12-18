@@ -86,7 +86,9 @@ class CleanEvn(APIView):
         ori_files_dir = obj.data.get("ori_files_dir")
         res_files_dir = obj.data.get("res_files_dir")
         try:
-            clean_env(container_id, ori_files_dir, res_files_dir)
+            status = clean_env(container_id=container_id, ori_files_dir=ori_files_dir, res_files_dir=res_files_dir)
+            if not status:
+                return Response({"code": 97, "msg": "传入清理数据存在问题"})
         except Exception as e:
             logging.exception(e)
             return Response({"code": 97, "msg": "清理运行结果失败"})

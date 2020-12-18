@@ -53,7 +53,7 @@ def docker_run_sdk(image_name):
     if not status:
         logging.exception(res)
         return False, res
-    ias_install = f"docker exec  {container_id} bash /root/give_license_ias.sh"
+    ias_install = f"docker exec  {container_id} bash /root/give_license_sdk.sh"
     status, res = sdk_subprocess(ias_install)
     if not status:
         logging.exception(res)
@@ -115,7 +115,7 @@ def docker_run_vas(image_name, port=None):
     if not status:
         logging.exception(res)
         return False, res
-    vas_install = f"docker exec  {container_id} bash /root/give_license_vas.sh &"
+    vas_install = f"docker exec  {container_id} bash /root/give_license_vas.sh "
     os.popen(vas_install)
     return True, container_id
 
@@ -213,6 +213,9 @@ def clean_env(*args, **kwargs):
     container_id = kwargs.get("container_id")
     ori_files_dir = kwargs.get("ori_files_dir")
     res_files_dir = kwargs.get("res_files_dir")
+    if not all([container_id, ori_files_dir, res_files_dir]):
+       logging.exception(res_files_dir, ori_files_dir, container_id)
+       return False
     # other =  kwargs.get("other")
     if container_id:
         os.system(f"docker stop {container_id}")

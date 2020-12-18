@@ -11,7 +11,7 @@ import logging
 import requests
 import os
 import time
-
+from .common.sdk_subprocess import sdk_subprocess
 from algoSdk.common.iter_files import iter_files
 
 logger = logging.getLogger(__name__)
@@ -59,6 +59,15 @@ def algo_ias_files(container_id, file_name, port, args):
     file_nums = len(files_with_dir) - len(err_files)
     # 初始化运行文件数目
     res_files_count = 0
+    cmd = f"netstat -aptn |grep {port}"
+    status, res = sdk_subprocess(cmd)
+    if not status:
+        logging.error(status)
+        return False
+    # 需要判断端口是否启动成功之后才能继续往下调用算法, 不然算法没有启动车就就会导致算法运行失败
+    while "LISTEN" not in res:
+        status, res = sdk_subprocess(cmd)
+    time.sleep(2)
     for file_with_dir in files_with_dir:
         # 原文件名称 文件路径
         file_dir, file = os.path.split(file_with_dir)

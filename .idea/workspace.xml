@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/git_license_sdk.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/git_license_sdk.sh" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/give_license_sdk.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,10 +194,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608169967410">
+    <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608280062049">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1608169967410" />
+    <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1608280062049" />
     <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608172574977">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -213,10 +218,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="461" y="156" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607599605153" />
-    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608260964394">
+    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608273702261">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608260964394" />
+    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608273702261" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1608260959586">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
