@@ -1,0 +1,12 @@
+# 当前设置的IOU: 0.5 
+
+#每个标签类型的总数
+hat: 481
+head: 392
+person: 962
+
+#被检查标签数目的情况
+hat: 597 (tp:274, fp:323)  perssion=0.459
+recall=0.5696
+head: 597 (tp:279, fp:318)  perssion=0.4673
+recall=0.7117

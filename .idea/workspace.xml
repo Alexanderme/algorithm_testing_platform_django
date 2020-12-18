@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/output/output.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/git_license_sdk.sh" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/utils/sdkAuthorization/give_license_sdk.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +43,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/algoSdk/utils/sdk_precision" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_precision" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\serializers" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk" />

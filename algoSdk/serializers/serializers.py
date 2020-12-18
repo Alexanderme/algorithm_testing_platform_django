@@ -36,3 +36,12 @@ class CleanEnvSerializer(serializers.Serializer):
     container_id = serializers.CharField(max_length=124)
     ori_files_dir = serializers.CharField(max_length=512)
     res_files_dir = serializers.CharField(max_length=512)
+
+
+class GetFilesResultSerializer(serializers.Serializer):
+    image_name = serializers.CharField(max_length=512)
+    args = serializers.CharField(max_length=2014)
+    tag_names = serializers.CharField(max_length=124)
+    alert_info = serializers.CharField(max_length=24)
+    iou = serializers.FloatField(max_value=1, min_value=0)
+    file_name = serializers.FileField()

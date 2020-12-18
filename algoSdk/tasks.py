@@ -13,6 +13,7 @@ import os
 import time
 from .common.sdk_subprocess import sdk_subprocess
 from algoSdk.common.iter_files import iter_files
+from .utils.sdk_precision.run import clear_dirs, xml_create, txt_create
 
 logger = logging.getLogger(__name__)
 
@@ -125,3 +126,37 @@ def algo_ias_files(container_id, file_name, port, args):
         return False
     return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': store_path, "error_files": err_files,
             "ori_files_dir": ori_files_dir, "res_files_dir": res_files_dir, "container_id": container_id}
+
+
+@shared_task
+def run_files(rootDir, port, names, iou, args, alert_info):
+    filenames = iter_files(rootDir)
+    xmls = filenames["xmls"]
+    files = filenames["files"]
+    total_files = len(files)
+    file_count = 0
+    path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    for xml in xmls:
+        xml_create(xml, path)
+    time.sleep(3)
+    for file in files:
+        file_count += 1
+        txt_create(file, port, names, args, alert_info)
+        process = int(file_count / total_files * 100)
+        run_files.update_state(state='PROGRESS', meta={'current': file_count, 'total': total_files, 'status': process})
+    main = os.path.join(path, "utils/sdk_precision/main.py")
+    if iou is None:
+        cmd = f"python3 {main}"
+    else:
+        cmd = f"python3 {main} -t {iou}"
+    os.system(cmd)
+
+    file_res = os.path.join(path, f"utils/sdk_precision/output/output.txt")
+    with open(file_res, 'r') as f:
+        res = f.read().splitlines()
+        res = str(res).replace("'',", "\n")
+    clear_dirs()
+    contain_stop = "docker ps |grep %s|awk '{print $1}'|xargs docker stop" % port
+    status, _ = sdk_subprocess(contain_stop)
+    os.system(f"rm -rf {rootDir}")
+    return {'current': 100, 'total': 100, 'status': 'Task completed!', "result": res}

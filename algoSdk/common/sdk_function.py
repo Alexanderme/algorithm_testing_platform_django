@@ -4,12 +4,14 @@
     #  @Author: Ljx
     #  @Time: 2020/12/4 14:38
 """
+import requests
 
 from .sdk_subprocess import sdk_subprocess
 import subprocess
 import re
 import os
 import logging
+from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
@@ -224,3 +226,64 @@ def clean_env(*args, **kwargs):
         os.system(f"rm -rf {ori_files_dir}")
     if res_files_dir:
         os.system(f"rm -rf {res_files_dir}")
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.abspath(__file__)))
+RES_DIR = os.path.abspath(os.path.join(os.path.abspath(BASE_DIR), "input"))
+
+# 要移动的路径
+res_xml_path = os.path.join(RES_DIR, "ground-truth")
+# 要移动的结果路径
+res_txt_path = os.path.join(RES_DIR, 'detection-results')
+ori_json = os.path.join(BASE_DIR, '.temp_files')
+
+
+
+def xml_create(file, path):
+    root = os.path.join(path, "utils/sdk_precision/input/ground-truth")
+    name_txt = file.split('/')[-1].split('.')[0] + ".txt"
+    print("xml_create", name_txt)
+    with open(file, "rb") as f:
+        file_b = f.read()
+    soup = BeautifulSoup(file_b, 'lxml')
+    object_all = soup.find_all("object")
+    for i in object_all:
+        name = i.find_all("name")[0].string
+        for m in i.find_all("bndbox"):
+            xmin = m.find_all("xmin")[0].string
+            ymin = m.find_all("ymin")[0].string
+            xmax = m.find_all("xmax")[0].string
+            ymax = m.find_all("ymax")[0].string
+            with open(os.path.join(root, name_txt), "a") as f:
+                f.write(
+                    "%s %s %s %s %s\n" % (name, int(float(xmin)), int(float(ymin)), int(float(xmax)), int(float(ymax))))
+
+
+def txt_create(file, port, names, args, alert_info):
+    url = "http://127.0.0.1" + ":" + str(port) + "/api/analysisImage"
+    image = file.split('/')[-1]
+    data = {
+        'image': (image, open(file, 'rb')),
+        "args": args
+    }
+    response = requests.post(url, files=data)
+    if alert_info is None:
+        alert_info = "alert_info"
+    res_index = response.json().get("result").get(alert_info)
+    name_txt = file.split('/')[-1].split('.')[0] + ".txt"
+    if res_index is None or res_index == [] or res_index == 'null' or res_index == 'Null' or res_index == 'NULL':
+        with open(os.path.join(res_txt_path, name_txt), "a") as f:
+            f.write("\n")
+        return
+    for res in res_index:
+        if res.get('confidence') is not None:
+            confidence = res.get('confidence')
+        else:
+            confidence = "1"
+        for name in names:
+            x = res.get('x')
+            y = res.get('y')
+            width = res.get('width') + x
+            height = res.get('height') + y
+            with open(os.path.join(res_txt_path, name_txt), "a") as f:
+                f.write("%s %s %s %s %s %s\n" % (name, confidence, x, y, width, height))
