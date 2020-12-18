@@ -8,6 +8,5 @@ chmod +x ev_license
 cp /usr/local/ev_sdk/authorization/license.txt  /usr/local/ev_sdk/bin
 cp /usr/local/ev_sdk/authorization/license.txt /usr/local/ias/license_conf.json
 bash /usr/local/ias/ias_stop.sh
-bash /usr/local/ias/ias_start.sh  &
 
 

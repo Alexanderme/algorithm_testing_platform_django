@@ -10,18 +10,17 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def sdk_subprocess(cmd, timeout=None):
+def sdk_subprocess(cmd):
     """
     封装 subprocess 用来定制化返回消息
     :param cmd: 运行命令
     :return: 返回命令运行结果以及状态码
     """
+    print("--------------------------------------------------------------------------")
+    print(cmd)
     try:
         res_p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
-        if timeout is None:
-            stdout, stderr = res_p.communicate()
-        else:
-            stdout, stderr = res_p.communicate(timeout=timeout)
+        stdout, stderr = res_p.communicate()
     except Exception as e:
         logging.exception(e)
         # 部分镜像不兼容utf-8 报错使用如下格式
