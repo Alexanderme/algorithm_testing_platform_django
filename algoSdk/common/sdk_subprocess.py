@@ -32,6 +32,5 @@ def sdk_subprocess(cmd):
             return True, stdout.replace('\n', '')
         return True, stdout
     else:
-        logging.exception(stderr)
         return False, stderr
 

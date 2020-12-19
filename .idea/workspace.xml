@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +211,7 @@
       <workItem from="1606958379990" duration="52350000" />
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
-      <workItem from="1608344464060" duration="11342000" />
+      <workItem from="1608344464060" duration="13358000" />
     </task>
     <servers />
   </component>

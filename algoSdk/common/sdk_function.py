@@ -29,7 +29,7 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
     :param dockerfile_name: dockerfile文件
     :return:
     """
-    status, res = sdk_subprocess(docker_build_dockerfile % (image_build_name, dockerfile_name, image_name, package_name, package_url))
+    status, res = sdk_subprocess(docker_build_dockerfile % (image_build_name, image_name, package_name, package_url, dockerfile_name))
     if not status:
         logging.exception(res)
         return False
@@ -57,7 +57,7 @@ def docker_run_sdk(image_name):
 
 
 def docker_run_ias(image_name, port):
-    status, res = sdk_subprocess(docker_run_cmd_ias % (image_name, port))
+    status, res = sdk_subprocess(docker_run_cmd_ias % (port, image_name))
     if not status:
         logging.exception(res)
         return False, res
@@ -78,7 +78,7 @@ def docker_run_ias(image_name, port):
 
 
 def docker_run_vas(image_name, port):
-    status, res = sdk_subprocess(docker_run_cmd_ias % (image_name, port))
+    status, res = sdk_subprocess(docker_run_cmd_ias % (port, image_name))
     if not status:
         logging.exception(res)
         return False, res

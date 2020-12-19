@@ -115,8 +115,8 @@ def algo_ias_files(container_id, file_name, port, args):
         process = int((res_files_count / file_nums) * 100)
     algo_ias_files.update_state(state='PROGRESS', meta={'current': res_files_count, 'total': file_nums, 'status': process})
     try:
-        os.system(f"cd {res_files_dir};tar -cvf result.tar *")
-        store_path = f"{res_files_dir}/result.tar"
+        os.system(f"cd {res_dir};tar -cvf result.tar *")
+        store_path = f"{res_dir}/result.tar"
     except Exception as e:
         logging.error(e)
         return False

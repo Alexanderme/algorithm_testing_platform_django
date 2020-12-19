@@ -34,7 +34,7 @@ vas_4_name = "vas_v4.3_cv4.1.tar.gz "
 vas_3_name = "vas_v4.3_cv3.4.tar.gz"
 dockerfile_vas = os.path.join(algo_sdk_dir, "utils/sdkPackage/Dockerfile_vas")
 
-# image_build_name, dockerfile_name, image_name, package_name, package_url
+# image_build_name, image_name, package_name, package_url, dockerfile_name
 docker_build_dockerfile = "docker build -t %s --build-arg IMAGE_NAME=%s --build-arg PACKAGE_NAME=%s --build-arg PACKAGE_URL=%s -f %s ."
 
 docker_run_cmd = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e NVIDIA_VISIBLE_DEVICES=0 --rm %s"
