@@ -2,15 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/output/output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/IasBuild.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/IasBuild.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/VasBuild.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/VasBuild.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/iter_files.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/iter_files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdkCmds.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_requests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/upload_download_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/utils/sdk_precision/run.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +61,7 @@
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_authorization" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tasks">
+  <component name="RunManager" selected="Python.argsCmd">
     <configuration name="AlgoRunRes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="dj_extremevision" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -95,6 +98,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algoSdk/api/IasBuild.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="argsCmd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="dj_extremevision" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/algoSdk/common" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algoSdk/common/argsCmd.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,6 +197,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.argsCmd" />
         <item itemvalue="Python.tasks" />
         <item itemvalue="Python.AlgoRunRes" />
         <item itemvalue="Python.sdk_function" />
@@ -192,6 +218,7 @@
       <workItem from="1606958379990" duration="52350000" />
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
+      <workItem from="1608344464060" duration="10608000" />
     </task>
     <servers />
   </component>
@@ -203,26 +230,30 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1608280062049" />
-    <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608172574977">
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608364866540">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608172574977" />
-    <state width="1875" height="280" key="GridCell.Tab.0.center" timestamp="1608172574977">
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866540" />
+    <state width="1875" height="280" key="GridCell.Tab.0.center" timestamp="1608364866540">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608172574977" />
-    <state width="1875" height="280" key="GridCell.Tab.0.left" timestamp="1608172574977">
+    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866540" />
+    <state width="1875" height="280" key="GridCell.Tab.0.left" timestamp="1608364866539">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608172574977" />
-    <state width="1875" height="280" key="GridCell.Tab.0.right" timestamp="1608172574977">
+    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866539" />
+    <state width="1875" height="280" key="GridCell.Tab.0.right" timestamp="1608364866540">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608172574977" />
+    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866540" />
     <state x="461" y="156" key="SettingsEditor" timestamp="1607599605153">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="461" y="156" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607599605153" />
+    <state x="640" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1608344481527">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="640" y="347" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608344481527" />
     <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608273702261">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -233,7 +264,8 @@
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608260959586" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/dj_extremevision$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1608172111109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk" />
+    <SUITE FILE_PATH="coverage/dj_extremevision$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1608345804688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk" />
+    <SUITE FILE_PATH="coverage/dj_extremevision$argsCmd.coverage" NAME="argsCmd Coverage Results" MODIFIED="1608353733571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/common" />
     <SUITE FILE_PATH="coverage/dj_extremevision$sdk_function.coverage" NAME="sdk_function Coverage Results" MODIFIED="1607308659306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/common" />
     <SUITE FILE_PATH="coverage/dj_extremevision$AlgoRunRes.coverage" NAME="AlgoRunRes Coverage Results" MODIFIED="1607950045685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/api" />
     <SUITE FILE_PATH="coverage/dj_extremevision$IasBuild.coverage" NAME="IasBuild Coverage Results" MODIFIED="1607066512763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/api" />

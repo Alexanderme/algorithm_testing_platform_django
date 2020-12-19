@@ -4,10 +4,14 @@
     #  @Author: Ljx
     #  @Time: 2020/12/4 14:38
 """
+import shutil
+
 import requests
 
 from .sdk_subprocess import sdk_subprocess
-import subprocess
+from ..common.argsCmd import docker_build, docker_run_cmd, authorization_sdk_file, docker_run_cmd_ias, \
+    authorization_ias_file, authorization_vas_file, run_vas_file, grep_opencv, sdk_privateKey, auth_message, \
+    algo_config, res_xml_path, res_txt_path, ori_json, url_image
 import re
 import os
 import logging
@@ -16,12 +20,6 @@ from bs4 import BeautifulSoup
 logger = logging.getLogger(__name__)
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-"""
-
-svas   https://vas-1256261446.cos.ap-guangzhou.myqcloud.com
-svas_v1.0cv3.4.tar.gz
-svas_v1.0cv4.1.tar.gz
-"""
 
 
 def docker_build(image_build_name, dockerfile_name, image_name, package_name, package_url):
@@ -31,9 +29,7 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
     :param dockerfile_name: dockerfile文件
     :return:
     """
-    docker_build = f"docker build -t {image_build_name} --build-arg IMAGE_NAME={image_name} " \
-                   f"--build-arg PACKAGE_NAME={package_name} --build-arg PACKAGE_URL={package_url} -f {dockerfile_name} ."
-    status, res = sdk_subprocess(docker_build)
+    status, res = sdk_subprocess(docker_build % (image_build_name, dockerfile_name, image_name, package_name, package_url))
     if not status:
         logging.exception(res)
         return False
@@ -41,16 +37,13 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
 
 
 def docker_run_sdk(image_name):
-    docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
-                 f"NVIDIA_VISIBLE_DEVICES=0 --rm {image_name}"
-    status, res = sdk_subprocess(docker_run)
+    status, res = sdk_subprocess(docker_run_cmd % image_name)
     if not status:
         logging.exception(res)
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
-    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_sdk.sh")
-    docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
+    docker_authorization = f"docker cp {authorization_sdk_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         logging.exception(res)
@@ -63,21 +56,14 @@ def docker_run_sdk(image_name):
     return True, container_id
 
 
-def docker_run_ias(image_name, port=None):
-    if port is None:
-        docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
-                     f"NVIDIA_VISIBLE_DEVICES=0 --rm {image_name}"
-    else:
-        docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
-                     f"NVIDIA_VISIBLE_DEVICES=0 --rm -p {port}:80 {image_name}"
-    status, res = sdk_subprocess(docker_run)
+def docker_run_ias(image_name, port):
+    status, res = sdk_subprocess(docker_run_cmd_ias % (image_name, port))
     if not status:
         logging.exception(res)
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
-    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_ias.sh")
-    docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
+    docker_authorization = f"docker cp {authorization_ias_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         logging.exception(res)
@@ -91,28 +77,20 @@ def docker_run_ias(image_name, port=None):
     return True, container_id
 
 
-def docker_run_vas(image_name, port=None):
-    if port is None:
-        docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
-                     f"NVIDIA_VISIBLE_DEVICES=0 --rm {image_name}"
-    else:
-        docker_run = "docker run -itd --runtime=nvidia --privileged   -e LANG=C.UTF-8 -e " \
-                     f"NVIDIA_VISIBLE_DEVICES=0 --rm -p {port}:10000 {image_name}"
-    status, res = sdk_subprocess(docker_run)
+def docker_run_vas(image_name, port):
+    status, res = sdk_subprocess(docker_run_cmd_ias % (image_name, port))
     if not status:
         logging.exception(res)
         return False, res
     container_id = res[:12]
     # 复制授权文件到容器
-    authorization_file = os.path.join(path, "utils/sdkAuthorization/give_license_vas.sh")
-    docker_authorization = f"docker cp {authorization_file} {container_id}:/root"
+    docker_authorization = f"docker cp {authorization_vas_file} {container_id}:/root"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         logging.exception(res)
         return False, res
     # 负责运行文件到容器
-    run_file = os.path.join(path, "utils/sdkAuthorization/run.conf")
-    docker_authorization = f"docker cp {run_file} {container_id}:/usr/local/vas"
+    docker_authorization = f"docker cp {run_vas_file} {container_id}:/usr/local/vas"
     status, res = sdk_subprocess(docker_authorization)
     if not status:
         logging.exception(res)
@@ -128,9 +106,7 @@ def grep_opencv_version(image):
     if not status:
         logging.exception(container_id)
         return False, "sdk算法启动失败"
-    grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
-                  "grep 'opencv.*3\.[0-9]'|awk 'END{print $1}'\""
-    status, opencv_version = sdk_subprocess(grep_opencv)
+    status, opencv_version = sdk_subprocess(grep_opencv % (container_id, 3))
     try:
         pattern_3 = ".*?(3.\d)"
         opencv_version = re.findall(pattern_3, opencv_version)[0]
@@ -140,25 +116,20 @@ def grep_opencv_version(image):
         errmsg.update({"OpenCV_version": opencv_version})
     except Exception as e:
         logger.exception(e)
-        grep_opencv = f"docker exec {container_id} bash -c \"ldd /usr/local/ev_sdk/lib/libji.so|" \
-                  "grep 'opencv.*4\.[0-9]'|awk 'END{print $1}'\""
-        status, opencv_version = sdk_subprocess(grep_opencv)
+        status, opencv_version = sdk_subprocess(grep_opencv % (container_id, 4))
         if not status:
             logging.exception(opencv_version)
             errmsg.update({"OpenCV_version": "获取OpenCV版本失败"})
         pattern_4 = ".*?(4.\d)"
         opencv_version = re.findall(pattern_4, opencv_version)[0]
         errmsg.update({"OpenCV_version": opencv_version})
-    sdk_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
-    status, res_p = sdk_subprocess(sdk_message)
+    status, res_p = sdk_subprocess(sdk_privateKey % container_id)
     if "No such file or directory" not in res_p:
         errmsg.update({"sdk_version": "算法SDK版本为3.0系列 配置路径为:/usr/local/ev_sdk/config/algo_config.json \n"})
     else:
         logging.exception(res_p)
         return False, "算法SDK版本为2.0系列 不输出内容"
-
-    auth_message = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/3rd/license/lib/pkgconfig/ji_license.pc |grep -i version'"
-    status, res = sdk_subprocess(auth_message)
+    status, res = sdk_subprocess(auth_message % container_id)
     if not res.startswith("cat"):
         errmsg.update({"sdk_authorization": "当前默认应该使用最新的版本库20.1.3, 当前算法授权库版本为" + res})
     else:
@@ -166,8 +137,7 @@ def grep_opencv_version(image):
         errmsg.update({"sdk_authorization": "获取授权信息失败, 授权库不是最新的20.1.3"})
 
     # 公私钥  配置文件 查看
-    privateKey = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/authorization/privateKey.pem'"
-    status, privateKey = sdk_subprocess(privateKey)
+    status, privateKey = sdk_subprocess(sdk_privateKey % container_id)
     if not status:
         logging.exception(privateKey)
         errmsg.update({"privateKey": "获取获取失败"})
@@ -176,10 +146,10 @@ def grep_opencv_version(image):
     else:
         errmsg.update({"Sdk_version": 3.0})
     errmsg.update({"privateKey": privateKey})
-    algo_config = f"docker exec -it  {container_id}  bash  -c 'cat /usr/local/ev_sdk/config/algo_config.json'"
-    status, algo_config = sdk_subprocess(algo_config)
+
+    status, res = sdk_subprocess(algo_config % container_id)
     if not status:
-        logging.exception(algo_config)
+        logging.exception(res)
         errmsg.update({"algo_config": "获取获取配置失败"})
     errmsg.update({"algo_config": algo_config})
     if opencv_version.startswith("3."):
@@ -227,22 +197,8 @@ def clean_env(*args, **kwargs):
     if res_files_dir:
         os.system(f"rm -rf {res_files_dir}")
 
-
-BASE_DIR = os.path.dirname(os.path.abspath(os.path.abspath(__file__)))
-RES_DIR = os.path.abspath(os.path.join(os.path.abspath(BASE_DIR), "input"))
-
-# 要移动的路径
-res_xml_path = os.path.join(RES_DIR, "ground-truth")
-# 要移动的结果路径
-res_txt_path = os.path.join(RES_DIR, 'detection-results')
-ori_json = os.path.join(BASE_DIR, '.temp_files')
-
-
-
-def xml_create(file, path):
-    root = os.path.join(path, "utils/sdk_precision/input/ground-truth")
+def xml_create(file):
     name_txt = file.split('/')[-1].split('.')[0] + ".txt"
-    print("xml_create", name_txt)
     with open(file, "rb") as f:
         file_b = f.read()
     soup = BeautifulSoup(file_b, 'lxml')
@@ -254,19 +210,18 @@ def xml_create(file, path):
             ymin = m.find_all("ymin")[0].string
             xmax = m.find_all("xmax")[0].string
             ymax = m.find_all("ymax")[0].string
-            with open(os.path.join(root, name_txt), "a") as f:
+            with open(os.path.join(res_xml_path, name_txt), "a") as f:
                 f.write(
                     "%s %s %s %s %s\n" % (name, int(float(xmin)), int(float(ymin)), int(float(xmax)), int(float(ymax))))
 
 
 def txt_create(file, port, names, args, alert_info):
-    url = "http://127.0.0.1" + ":" + str(port) + "/api/analysisImage"
     image = file.split('/')[-1]
     data = {
         'image': (image, open(file, 'rb')),
         "args": args
     }
-    response = requests.post(url, files=data)
+    response = requests.post(url_image % port, files=data)
     if alert_info is None:
         alert_info = "alert_info"
     res_index = response.json().get("result").get(alert_info)
@@ -287,3 +242,16 @@ def txt_create(file, port, names, args, alert_info):
             height = res.get('height') + y
             with open(os.path.join(res_txt_path, name_txt), "a") as f:
                 f.write("%s %s %s %s %s %s\n" % (name, confidence, x, y, width, height))
+
+def clear_dirs():
+    # 先清空文件夹 在创建文件夹
+    if os.path.exists(res_xml_path):
+        shutil.rmtree(res_xml_path)
+    if os.path.exists(res_txt_path):
+        shutil.rmtree(res_txt_path)
+    if os.path.exists(ori_json):
+        shutil.rmtree(ori_json)
+    # 创建需要的文件夹
+    os.mkdir(res_xml_path)
+    os.mkdir(res_txt_path)
+    os.mkdir(ori_json)

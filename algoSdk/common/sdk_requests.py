@@ -6,11 +6,9 @@
 """
 import requests
 import logging
+from .argsCmd import ias_api, opencv_version
 
 logger = logging.getLogger(__name__)
-
-ias_api = "http://127.0.0.1:8000/api/sdk/iasPackage"
-opencv_version = "http://127.0.0.1:8000/api/sdk/algoMessage"
 
 def ias_packing(port, image_name, version):
     data = {

@@ -46,8 +46,6 @@ def download_file(file):
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file)
     print("file ---------------------------------------------")
-    print(file)
-    print(file_name)
     file_name = file.split("/")[-1]
     response['X-Accel-Redirect'] = f'{path}/files/algoFileResdir/{file_name}'
     return response

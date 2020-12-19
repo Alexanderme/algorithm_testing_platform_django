@@ -16,6 +16,9 @@ import logging
 from ..tasks import run_files
 from ..common.upload_download_file import upload_file
 from dj_extremevision.settings import Algo_files_dir
+from ..common.argsCmd import ori_files_dir
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -36,22 +39,16 @@ class GetFilesResult(APIView):
         tag_names = obj.data.get('tag_names')
         alert_info = obj.data.get('alert_info')
         iou = obj.data.get('iou')
-
         tag_names = tag_names.replace(" ", "").split(",")
-        port = random.randint(10000, 65000)
-
         status, file_name = upload_file(requests, Algo_files_dir)
         if not status:
             logging.exception(file_name)
             return Response({"code": "96", "msg": "文件上传失败"})
 
         random_str = ''.join([each for each in str(uuid.uuid1()).split('-')])
-        parent_dir = os.path.dirname(os.path.abspath(__file__))
         # 创建临时存放运行文件文件夹 和 算法运行结果文件夹
-        ori_files_dir = os.path.join(parent_dir, f"files/algoFilesdir/ori_{random_str}")
-        res_files_dir = os.path.join(parent_dir, f"files/algoFileResdir/res_{random_str}")
-
-        os.system(f"unzip {file_name} -d {ori_files_dir}")
+        ori_dir = ori_files_dir % random_str
+        os.system(f"unzip {file_name} -d {ori_dir}")
         os.system(f"rm -rf {file_name}")
 
         opencv_version = get_sdk_opencv_version(image_name)

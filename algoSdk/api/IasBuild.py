@@ -11,19 +11,11 @@ from ..serializers.serializers import IasPackageSerializers
 from ..common.sdk_function import docker_build
 from ..common.sdk_function import docker_run_ias
 from ..common.sdk_requests import get_sdk_opencv_version
-
+from ..common.argsCmd import ias_3_name, ias_3_url, ias_4_name, ias_4_url, dockerfile_ias
 import os
 import logging
 
 logger = logging.getLogger(__name__)
-
-path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ias_4_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.74_cv4.1.tar.gz"
-ias_3_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.90_cv3.4.tar.gz"
-ias_4_name = "ias_v4.74_cv4.1.tar.gz"
-ias_3_name = "ias_v4.90_cv3.4.tar.gz"
-
-
 
 class IasPackage(APIView):
     """
@@ -37,9 +29,8 @@ class IasPackage(APIView):
             return Response({"87": "参数错误"})
         image_name = serializer.data.get("image_name")
         port = serializer.data.get("port")
-
-        dockerfile_ias = os.path.join(path, "utils/sdkPackage/Dockerfile_ias")
         image = image_name + "_test_ias"
+
         opencv_version = get_sdk_opencv_version(image_name)
         if not opencv_version:
             logging.exception(opencv_version)

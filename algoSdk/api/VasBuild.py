@@ -17,19 +17,13 @@ from rest_framework.response import Response
 from ..serializers.serializers import VasPackageSerializers
 from ..common.sdk_function import docker_build
 from ..common.sdk_function import docker_run_vas
-
+from ..common.argsCmd import vas_3_name, vas_3_url, vas_4_name, vas_4_url, dockerfile_vas
 import os
 import logging
 from ..common.sdk_requests import get_sdk_opencv_version
 
 logger = logging.getLogger(__name__)
-path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-vas_4_url = "https://vas-1256261446.cos.ap-guangzhou.myqcloud.com/vas_v4.3_cv4.1.tar.gz"
-vas_3_url = "https://vas-1256261446.cos.ap-guangzhou.myqcloud.com/vas_v4.3_cv3.4.tar.gz"
-vas_4_name = "vas_v4.3_cv4.1.tar.gz "
-vas_3_name = "vas_v4.3_cv3.4.tar.gz"
 
 
 class VasPackage(APIView):
@@ -44,8 +38,8 @@ class VasPackage(APIView):
             return Response({"87": "参数错误"})
         image_name = obj.data.get("image_name")
         port = obj.data.get("port")
-        dockerfile_vas = os.path.join(path, "utils/sdkPackage/Dockerfile_vas")
         image = image_name + "_test_vas"
+
         try:
             opencv_version = get_sdk_opencv_version(image_name)
         except Exception as e:
