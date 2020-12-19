@@ -9,7 +9,7 @@ import shutil
 import requests
 
 from .sdk_subprocess import sdk_subprocess
-from ..common.argsCmd import docker_build, docker_run_cmd, authorization_sdk_file, docker_run_cmd_ias, \
+from ..common.argsCmd import docker_build_dockerfile, docker_run_cmd, authorization_sdk_file, docker_run_cmd_ias, \
     authorization_ias_file, authorization_vas_file, run_vas_file, grep_opencv, sdk_privateKey, auth_message, \
     algo_config, res_xml_path, res_txt_path, ori_json, url_image
 import re
@@ -29,7 +29,7 @@ def docker_build(image_build_name, dockerfile_name, image_name, package_name, pa
     :param dockerfile_name: dockerfile文件
     :return:
     """
-    status, res = sdk_subprocess(docker_build % (image_build_name, dockerfile_name, image_name, package_name, package_url))
+    status, res = sdk_subprocess(docker_build_dockerfile % (image_build_name, dockerfile_name, image_name, package_name, package_url))
     if not status:
         logging.exception(res)
         return False
