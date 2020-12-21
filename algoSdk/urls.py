@@ -10,8 +10,8 @@ from .api.IasBuild import IasPackage
 from .api.VasBuild import VasPackage
 from .api.AlgoMessage import AlgoOpencvVersion
 from .api.AlgoRunRes import AlgoRes
-from .api.CeleryTask import TaskStatus, FilesResult, CleanEvn
-from .api.CeleryTask import FilesResult
+from .api.CeleryTask import TaskStatus, CleanEvn, FilesResult
+from .api.AlgoPerssion import GetFilesResult
 
 
 urlpatterns = [
@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'sdk/taskInfo', TaskStatus.as_view()),
     url(r'sdk/fileResult', FilesResult.as_view()),
     url(r'sdk/cleanEnv', CleanEvn.as_view()),
+    url(r'sdk/algoPerssion', GetFilesResult.as_view()),
 ]

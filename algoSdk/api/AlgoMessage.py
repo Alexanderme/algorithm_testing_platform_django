@@ -13,6 +13,7 @@ from ..serializers.serializers import AlgoOpencvVersionSerializers
 
 logger = logging.getLogger(__name__)
 
+
 class AlgoOpencvVersion(APIView):
     def post(self, requests, *args, **kwargs):
         data = requests.data
@@ -27,6 +28,3 @@ class AlgoOpencvVersion(APIView):
             logging.exception(open_cv_version)
             return Response({"code": "90", "msg": open_cv_version})
         return Response(open_cv_version)
-
-
-

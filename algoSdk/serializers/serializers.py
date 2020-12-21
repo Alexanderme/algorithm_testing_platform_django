@@ -40,7 +40,7 @@ class CleanEnvSerializer(serializers.Serializer):
 
 class GetFilesResultSerializer(serializers.Serializer):
     image_name = serializers.CharField(max_length=512)
-    args = serializers.CharField(max_length=2014)
+    args = serializers.CharField(max_length=2014, required=False)
     tag_names = serializers.CharField(max_length=124)
     alert_info = serializers.CharField(max_length=24)
     iou = serializers.FloatField(max_value=1, min_value=0)

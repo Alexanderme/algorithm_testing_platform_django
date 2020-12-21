@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_subprocess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoMessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoMessage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/CeleryTask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,6 +213,7 @@
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
       <workItem from="1608344464060" duration="13358000" />
+      <workItem from="1608515355583" duration="9504000" />
     </task>
     <servers />
   </component>
@@ -243,14 +245,14 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="461" y="156" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607599605153" />
-    <state x="640" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1608344481527">
+    <state x="640" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1608515352726">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="640" y="347" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608344481527" />
-    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608273702261">
+    <state x="640" y="347" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608515352726" />
+    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608538140622">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608273702261" />
+    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608538140622" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1608260959586">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

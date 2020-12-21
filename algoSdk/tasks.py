@@ -70,10 +70,6 @@ def algo_ias_files(container_id, file_name, port, args):
     for file_with_dir in files_with_dir:
         # 原文件名称 文件路径
         file_dir, file = os.path.split(file_with_dir)
-        # 结果文件路径
-        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}").replace("algoFilesdir", "algoFileResdir")
-        res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
-        res_file_name = os.path.join(res_file_dir, file)
         # 调用IAS
         try:
             if file.lower().endswith("avi") or file.lower().endswith("mp4") or file.lower().endswith("flv"):
@@ -105,6 +101,12 @@ def algo_ias_files(container_id, file_name, port, args):
                     "error_files": err_files,
                     "ori_files_dir": ori_dir, "res_files_dir": res_dir, "container_id": container_id}
         res = base64.decodebytes(res.encode('ascii'))
+        # 结果文件路径
+        res_file_dir = file_dir.replace(f"ori_{random_str}", f"res_{random_str}").replace("algoFilesdir", "algoFileResdir")
+        res_file_dir_txt = os.path.join(res_file_dir, "res.txt")
+        res_file_name = os.path.join(res_file_dir, file)
+        if not os.path.exists(res_file_dir):
+            os.makedirs(res_file_dir)
         with open(res_file_name, 'wb') as f:
             f.write(res)
         res_file_name = res_file_name.split('/')[-1]
