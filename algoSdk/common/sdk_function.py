@@ -185,8 +185,8 @@ def clean_env(*args, **kwargs):
     container_id = kwargs.get("container_id")
     ori_files_dir = kwargs.get("ori_files_dir")
     res_files_dir = kwargs.get("res_files_dir")
-    if not all([container_id, ori_files_dir, res_files_dir]):
-       logging.exception(res_files_dir, ori_files_dir, container_id)
+    if not all([container_id, ori_files_dir]):
+       logging.exception(ori_files_dir, container_id)
        return False
     # other =  kwargs.get("other")
     if container_id:

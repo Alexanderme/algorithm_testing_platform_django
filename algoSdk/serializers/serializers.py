@@ -28,6 +28,7 @@ class AlgoResSerializer(serializers.Serializer):
 
 class CeleryTaskSerializer(serializers.Serializer):
     task_id = serializers.CharField(max_length=124)
+    task_type = serializers.CharField(max_length=124)
 
 class FilesResultSerializer(serializers.Serializer):
     files = serializers.CharField(max_length=256)
