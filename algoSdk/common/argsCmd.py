@@ -58,5 +58,5 @@ algo_config = "docker exec -it  %s  bash  -c 'cat /usr/local/ev_sdk/config/algo_
 res_xml_path = os.path.join(algo_sdk_dir, "utils/sdk_precision/input/ground-truth")
 # 要移动的结果路径
 res_txt_path = os.path.join(algo_sdk_dir, 'utils/sdk_precision/input/detection-results')
-ori_json = os.path.join(algo_sdk_dir, 'utils/sdk_precision/.temp_files')
+ori_json = os.path.join(algo_sdk_dir, 'utils/sdk_precision/input/.temp_files')
 

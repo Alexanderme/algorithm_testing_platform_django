@@ -4,7 +4,6 @@
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
@@ -213,7 +212,7 @@
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
       <workItem from="1608344464060" duration="13358000" />
-      <workItem from="1608515355583" duration="14009000" />
+      <workItem from="1608515355583" duration="14620000" />
     </task>
     <servers />
   </component>

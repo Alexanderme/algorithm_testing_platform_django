@@ -249,6 +249,6 @@ def clear_dirs():
     if os.path.exists(ori_json):
         shutil.rmtree(ori_json)
     # 创建需要的文件夹
-    os.mkdir(res_xml_path)
-    os.mkdir(res_txt_path)
-    os.mkdir(ori_json)
+    os.makedirs(res_xml_path)
+    os.makedirs(res_txt_path)
+    os.makedirs(ori_json)

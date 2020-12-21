@@ -49,6 +49,7 @@ class GetFilesResult(APIView):
         ori_dir = ori_files_dir % random_str
         os.system(f"unzip {file_name} -d {ori_dir}")
         os.system(f"rm -rf {file_name}")
+
         opencv_version = get_sdk_opencv_version(image_name)
         if not opencv_version:
             logging.exception(opencv_version)

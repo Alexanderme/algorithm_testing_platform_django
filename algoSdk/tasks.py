@@ -13,7 +13,7 @@ import os
 import time
 from .common.sdk_subprocess import sdk_subprocess
 from algoSdk.common.iter_files import iter_files
-from .common.sdk_function import xml_create, txt_create
+from .common.sdk_function import xml_create, txt_create, clear_dirs
 from .common.argsCmd import url_image, url_video, algo_sdk_dir, ori_files_dir, res_files_dir
 
 logger = logging.getLogger(__name__)
@@ -160,4 +160,5 @@ def run_files(ori_dir, port, tag_names, iou, args, alert_info):
     contain_stop = "docker ps |grep %s|awk '{print $1}'|xargs docker stop" % port
     status, _ = sdk_subprocess(contain_stop)
     os.system(f"rm -rf {ori_dir}")
+    clear_dirs()
     return {'current': 100, 'total': 100, 'status': 'Task completed!', "result": res}
