@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 import random
 import logging
 
+from ..common.sdk_function import clear_dirs
 from algoSdk.tasks import algo_ias_files
 from ..serializers.serializers import AlgoResSerializer
 from ..common.upload_download_file import upload_file
@@ -27,6 +28,7 @@ class AlgoRes(APIView):
         image_name = obj.data.get('image_name')
         args = obj.data.get('args')
         # 保存文件
+        clear_dirs()
         status, file_name = upload_file(requests, Algo_files_dir)
         if not status:
             logging.exception(file_name)

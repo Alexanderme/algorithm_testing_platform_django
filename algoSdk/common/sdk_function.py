@@ -211,8 +211,7 @@ def xml_create(file):
             xmax = m.find_all("xmax")[0].string
             ymax = m.find_all("ymax")[0].string
             with open(os.path.join(res_xml_path, name_txt), "a") as f:
-                f.write(
-                    "%s %s %s %s %s\n" % (name, int(float(xmin)), int(float(ymin)), int(float(xmax)), int(float(ymax))))
+                f.write("%s %s %s %s %s\n" % (name, int(float(xmin)), int(float(ymin)), int(float(xmax)), int(float(ymax))))
 
 
 def txt_create(file, port, names, args, alert_info):
@@ -222,8 +221,6 @@ def txt_create(file, port, names, args, alert_info):
         "args": args
     }
     response = requests.post(url_image % port, files=data)
-    if alert_info is None:
-        alert_info = "alert_info"
     res_index = response.json().get("result").get(alert_info)
     name_txt = file.split('/')[-1].split('.')[0] + ".txt"
     if res_index is None or res_index == [] or res_index == 'null' or res_index == 'Null' or res_index == 'NULL':

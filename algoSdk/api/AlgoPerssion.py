@@ -18,7 +18,6 @@ from ..common.upload_download_file import upload_file
 from dj_extremevision.settings import Algo_files_dir
 from ..common.argsCmd import ori_files_dir
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -50,7 +49,6 @@ class GetFilesResult(APIView):
         ori_dir = ori_files_dir % random_str
         os.system(f"unzip {file_name} -d {ori_dir}")
         os.system(f"rm -rf {file_name}")
-
         opencv_version = get_sdk_opencv_version(image_name)
         if not opencv_version:
             logging.exception(opencv_version)
@@ -63,6 +61,6 @@ class GetFilesResult(APIView):
             logging.exception(container_id)
             return Response({"code": "90", "msg": "封装ias失败"})
 
-        task = run_files.delay(ori_files_dir, port, tag_names, iou, args, alert_info)
+        task = run_files.delay(ori_dir, port, tag_names, iou, args, alert_info)
 
         return Response({"code": "100", "msg": "celery任务启动成功", "task_id": task.id})
