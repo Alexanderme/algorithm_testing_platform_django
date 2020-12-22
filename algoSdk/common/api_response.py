@@ -4,7 +4,7 @@
     #  @Author: Ljx
     #  @Time: 2020/12/22 18:43
 """
-from django.utils import six
+import six
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 

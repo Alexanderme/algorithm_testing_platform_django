@@ -48,9 +48,9 @@
           }
           if (res) {
             if (res.code === "100") {
-              res = JSON.stringify(res);
+              res = res.data
               console.log(res)
-              this.iasRes = res.sdk_version + res.sdk_authorization + res.algo_message
+              this.iasRes = res.sdk_version
               this.privateKey = res.privateKey
               this.algo_configs = res.algo_config
             } else {

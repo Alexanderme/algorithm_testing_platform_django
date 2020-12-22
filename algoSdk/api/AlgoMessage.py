@@ -4,7 +4,6 @@
     #  @Author: Ljx
     #  @Time: 2020/12/7 12:22
 """
-from rest_framework.response import Response
 from rest_framework.views import APIView
 import logging
 
@@ -17,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class AlgoOpencvVersion(APIView):
     def post(self, requests, *args, **kwargs):
-        data = requests.query_params
+        data = requests.data
         obj = AlgoOpencvVersionSerializers(data=data)
         if not obj.is_valid():
             logging.exception(obj)

@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algoSdk/common/api_response.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoMessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoMessage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dj_extremevision/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dj_extremevision/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/algoSdk.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/algoSdk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AlgoFilesResultItem/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AlgoFilesResultItem/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/api_response.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/api_response.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/AlgoMessageItem/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AlgoMessageItem/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AlgoPackagingItem/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AlgoPackagingItem/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/ComponentsDemo/AlgoMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/ComponentsDemo/AlgoMessage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +222,7 @@
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
       <workItem from="1608344464060" duration="13358000" />
-      <workItem from="1608515355583" duration="31556000" />
+      <workItem from="1608515355583" duration="33408000" />
     </task>
     <servers />
   </component>
@@ -246,22 +241,22 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="690" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608623159737" />
-    <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608623001991">
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608634342411">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001991" />
-    <state width="1875" height="280" key="GridCell.Tab.0.center" timestamp="1608623001990">
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608634342411" />
+    <state width="1875" height="280" key="GridCell.Tab.0.center" timestamp="1608634342411">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001990" />
-    <state width="1875" height="280" key="GridCell.Tab.0.left" timestamp="1608623001990">
+    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608634342411" />
+    <state width="1875" height="280" key="GridCell.Tab.0.left" timestamp="1608634342411">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001990" />
-    <state width="1875" height="280" key="GridCell.Tab.0.right" timestamp="1608623001990">
+    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608634342411" />
+    <state width="1875" height="280" key="GridCell.Tab.0.right" timestamp="1608634342411">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001990" />
+    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608634342411" />
     <state x="461" y="156" key="SettingsEditor" timestamp="1607599605153">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

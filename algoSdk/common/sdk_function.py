@@ -151,7 +151,7 @@ def grep_opencv_version(image):
     if not status:
         logging.exception(res)
         errmsg.update({"algo_config": "获取获取配置失败"})
-    errmsg.update({"algo_config": algo_config})
+    errmsg.update({"algo_config": res})
     if opencv_version.startswith("3."):
         errmsg.update({"algo_message": '当前OpenCV版本为:3.4, vas安装包:vas_v4.3_cv3.4.tar.gz, ias安装包:ias_v4.90_cv3.4.tar.gz'})
         stop = f"docker stop {container_id}"
