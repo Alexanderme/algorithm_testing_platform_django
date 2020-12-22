@@ -3,8 +3,8 @@ import { Message } from 'element-ui'
 
 // base setting
 const service = axios.create({
-  baseURL:"http://192.168.1.103:8000/api",
-  timeout:5000
+  baseURL:"http://192.168.1.103:8000/api/",
+  timeout:500000
 })
 
 service.interceptors.request.use(config => {

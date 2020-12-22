@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UwsgiScript/uwsgi.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/api/AlgoePerformance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/common/connect_server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algoSdk/files/algo_performance/1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysql/docker-entrypoint.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysql/init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysql/my.cnf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/common/api_response.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GlobalStatusCode.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalStatusCode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoMessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoMessage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dj_extremevision/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dj_extremevision/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/algoSdk.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/algoSdk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AlgoFilesResultItem/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AlgoFilesResultItem/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AlgoMessageItem/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AlgoMessageItem/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AlgoPackagingItem/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AlgoPackagingItem/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/ComponentsDemo/AlgoMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/ComponentsDemo/AlgoMessage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +31,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/frontend/src/components/AlgoFilesResultItem/index.vue" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectId" id="1l7qGBeXiiY3TYuLp2Mc9E1KzCz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -49,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dj_extremevision" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -64,13 +62,14 @@
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_authorization" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\dj_extremevision" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\mysql" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\nginx" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_precision" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.argsCmd">
+  <component name="RunManager" selected="Python.settings">
     <configuration name="AlgoRunRes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="dj_extremevision" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,28 +84,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algoSdk/api/AlgoRunRes.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="IasBuild" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="dj_extremevision" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/algoSdk/api" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algoSdk/api/IasBuild.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,6 +128,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algoSdk/common/sdk_function.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="settings" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="dj_extremevision" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dj_extremevision" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dj_extremevision/settings.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,11 +205,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.settings" />
         <item itemvalue="Python.argsCmd" />
         <item itemvalue="Python.tasks" />
         <item itemvalue="Python.AlgoRunRes" />
         <item itemvalue="Python.sdk_function" />
-        <item itemvalue="Python.IasBuild" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +227,7 @@
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
       <workItem from="1608344464060" duration="13358000" />
-      <workItem from="1608515355583" duration="20703000" />
+      <workItem from="1608515355583" duration="31556000" />
     </task>
     <servers />
   </component>
@@ -243,22 +242,26 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1608280062049" />
-    <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608364866540">
+    <state x="690" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1608623159737">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866540" />
-    <state width="1875" height="280" key="GridCell.Tab.0.center" timestamp="1608364866540">
+    <state x="690" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608623159737" />
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom" timestamp="1608623001991">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866540" />
-    <state width="1875" height="280" key="GridCell.Tab.0.left" timestamp="1608364866539">
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001991" />
+    <state width="1875" height="280" key="GridCell.Tab.0.center" timestamp="1608623001990">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866539" />
-    <state width="1875" height="280" key="GridCell.Tab.0.right" timestamp="1608364866540">
+    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001990" />
+    <state width="1875" height="280" key="GridCell.Tab.0.left" timestamp="1608623001990">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608364866540" />
+    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001990" />
+    <state width="1875" height="280" key="GridCell.Tab.0.right" timestamp="1608623001990">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608623001990" />
     <state x="461" y="156" key="SettingsEditor" timestamp="1607599605153">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -280,6 +283,7 @@
     <SUITE FILE_PATH="coverage/dj_extremevision$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1608345804688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk" />
     <SUITE FILE_PATH="coverage/dj_extremevision$argsCmd.coverage" NAME="argsCmd Coverage Results" MODIFIED="1608353733571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/common" />
     <SUITE FILE_PATH="coverage/dj_extremevision$sdk_function.coverage" NAME="sdk_function Coverage Results" MODIFIED="1607308659306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/common" />
+    <SUITE FILE_PATH="coverage/dj_extremevision$settings.coverage" NAME="settings Coverage Results" MODIFIED="1608623001984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dj_extremevision" />
     <SUITE FILE_PATH="coverage/dj_extremevision$AlgoRunRes.coverage" NAME="AlgoRunRes Coverage Results" MODIFIED="1607950045685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/api" />
     <SUITE FILE_PATH="coverage/dj_extremevision$IasBuild.coverage" NAME="IasBuild Coverage Results" MODIFIED="1607066512763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algoSdk/api" />
   </component>

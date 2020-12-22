@@ -1,63 +1,63 @@
 import request from '@/utils/request'
 
-export function getPackageIas(params) {
-    return request({
-        url: 'sdk/iasPackage',
-        method: "post",
-        params
-    })
+export function getPackageIas(formData) {
+  return request({
+    url: 'sdk/iasPackage',
+    method: "post",
+    data: formData,
+  })
 }
 
 
-export function getPackageVas(params) {
-    return request({
-        url: 'sdk/vasPackage',
-        method: "post",
-        params
-    })
+export function getPackageVas(formData) {
+  return request({
+    url: 'sdk/vasPackage',
+    method: "post",
+    data: formData,
+  })
 }
 
 
-export function getSdkOpenCV(params) {
-    return request({
-        url: 'sdk/algoMessage',
-        method:"post",
-        params
-    })
+export function getSdkOpenCV(formData) {
+  return request({
+    url: 'sdk/algoMessage',
+    method: "post",
+    data: formData,
+  })
 }
 
 export function postAlgoFilesResult(formData) {
-    return request({
-        url: 'sdk/algoRes',
-        method:"post",
-        data:formData,
-    })
+  return request({
+    url: 'sdk/algoRes',
+    method: "post",
+    data: formData,
+  })
 }
 
 export function getAlgoFiles(formData) {
-    return request({
-        url: 'sdk/fileResult',
-        method:"post",
-        responseType: "arraybuffer",
-        data:formData
-    })
+  return request({
+    url: 'sdk/fileResult',
+    method: "post",
+    responseType: "arraybuffer",
+    data: formData
+  })
 }
 
 
-export function getAlgoFilesTaskId(params) {
+export function getAlgoFilesTaskId(formData) {
   return request({
-        url: 'sdk/taskInfo',
-        method:"get",
-        params
-    })
+    url: 'sdk/taskInfo',
+    method: "get",
+    data: formData
+  })
 }
 
 export function clearAlgoRunEnv(formData) {
   return request({
-        url: 'sdk/cleanEnv',
-        method:"post",
-        data:formData
-    })
+    url: 'sdk/cleanEnv',
+    method: "post",
+    data: formData
+  })
 }
 
 
@@ -110,19 +110,19 @@ export function clearAlgoRunEnv(formData) {
 
 export function getMissRateTaskId(params) {
   return request({
-        url: 'sdk/taskInfo',
-        method:"get",
-        params
-    })
+    url: 'sdk/taskInfo',
+    method: "get",
+    params
+  })
 }
 
 
 export function getAlgoPrecision(formData) {
-    return request({
-        url: 'sdk/algoPerssion',
-        method:"post",
-        data:formData
-    })
+  return request({
+    url: 'sdk/algoPerssion',
+    method: "post",
+    data: formData
+  })
 }
 
 // // performamce

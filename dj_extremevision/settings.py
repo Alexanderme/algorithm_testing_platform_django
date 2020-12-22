@@ -70,8 +70,6 @@ LOGGING = {
 }
 
 ALLOWED_HOSTS = ['*']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,14 +80,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'algoSdk'
+    'algoSdk',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -100,7 +100,7 @@ ROOT_URLCONF = 'dj_extremevision.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -168,15 +168,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/dist/static"),
+]
 STATIC_URL = '/static/'
-
-
 # 跨域忽略
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
-    '*'
-)
 
 CORS_ALLOW_METHODS = (
     'DELETE',

@@ -6,11 +6,12 @@
 
 <script>
   import AlgoMessageItem from '@/components/AlgoMessageItem'
-export default {
-  components: {
-    AlgoMessageItem
+
+  export default {
+    components: {
+      AlgoMessageItem
+    }
   }
-}
 </script>
 
 <style lang="css">
