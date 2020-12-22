@@ -1,0 +1,50 @@
+@import "./mixin.scss";
+body{
+  font-size: 14px;
+}
+body, html{
+  height: 100%;
+  width: 100%;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body::-webkit-scrollbar{
+  width: 0;
+}
+.main-wrap{
+  height: 100%;
+  width: 100%;
+}
+
+.router-link-active{
+  span{
+    color: $sideTextColor !important;
+  }
+  .icon{
+    color: $sideTextColor !important;
+  }
+}
+.clear::before{
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+// 开篇组件介绍
+.intro{
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f3f3f3;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  a{
+    color: #409eff;
+    cursor: pointer;
+  }
+}

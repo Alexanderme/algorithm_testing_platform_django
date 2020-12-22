@@ -18,6 +18,22 @@ def mysql_error():
     return '98', '数据库查询错误'
 
 
+def env_error():
+    return '97', '系统环境处理相关失败'
+
+
+def upload_downfile_error():
+    return '96', '文件操作相关失败'
+
+
+def celery_error():
+    return '95', '异步任务相关失败'
+
+
+def connect_server():
+    return '94', '连接服务器相关失败'
+
+
 def parameter_wrong():
     return '87', '参数错误'
 
@@ -32,13 +48,3 @@ def parameter_is_exist():
 
 def algo_error():
     return '90', '算法相关失败'
-
-def upload_downfile_error():
-    return '96', '文件操作相关失败'
-
-def celery_error():
-    return '95', '异步任务相关失败'
-
-
-def env_error():
-    return '97', '系统环境处理相关失败'

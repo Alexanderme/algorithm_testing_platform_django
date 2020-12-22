@@ -1,0 +1,37 @@
+<template>
+  <div class="form-listen components-wrap">
+    <form-child :formInfo="forms" @on-form-change="onFormChange"></form-child>
+    <el-button>{{test}}</el-button>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      forms: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      test: '占位符...'
+    }
+  },
+  methods: {
+    onFormChange (val) {
+      this.test = '子组件数据正在传送给父组件...'
+    }
+  },
+  components: {
+    FormChild
+  }
+}
+</script>
+
+<style lang="scss">
+</style>

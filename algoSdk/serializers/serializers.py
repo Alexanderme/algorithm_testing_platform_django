@@ -46,3 +46,12 @@ class GetFilesResultSerializer(serializers.Serializer):
     alert_info = serializers.CharField(max_length=24)
     iou = serializers.FloatField(max_value=1, min_value=0)
     file_name = serializers.FileField()
+
+
+class AlgoResourceOccupationSerializer(serializers.Serializer):
+    file_name = serializers.FileField()
+    image_name = serializers.CharField(max_length=512)
+    server_ip = serializers.CharField(max_length=24)
+    server_port = serializers.IntegerField(min_value=0, max_value=60000)
+    server_user = serializers.CharField(max_length=56)
+    server_passwd = serializers.CharField(max_length=56)

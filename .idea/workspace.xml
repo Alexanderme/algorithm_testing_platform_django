@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UwsgiScript/uwsgi.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/api/AlgoePerformance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/common/connect_server.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algoSdk/files/algo_performance/1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysql/docker-entrypoint.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysql/init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysql/my.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/api/AlgoPerssion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/argsCmd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalStatusCode.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalStatusCode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/serializers/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx.conf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,19 +49,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/algoSdk/utils/sdk_precision" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_precision" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\serializers" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\celery_tasks" />
       <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_authorization" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision" />
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\mysql" />
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\nginx" />
+      <recent name="C:\Users\Administrator\Desktop\extremevision\dj_extremevision\algoSdk\utils\sdk_precision" />
     </key>
   </component>
   <component name="RunManager" selected="Python.argsCmd">
@@ -212,12 +228,15 @@
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
       <workItem from="1608344464060" duration="13358000" />
-      <workItem from="1608515355583" duration="14620000" />
+      <workItem from="1608515355583" duration="20703000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="WindowStateProjectService">
     <state x="683" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608280062049">
