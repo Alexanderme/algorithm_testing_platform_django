@@ -25,7 +25,7 @@ def ias_packing(port, image_name, version):
     if code != "100":
         logging.exception(res)
         return False
-    container_id = res.get("container_id")
+    container_id = res.get("data").get("container_id")
     return True, container_id
 
 
@@ -42,4 +42,4 @@ def get_sdk_opencv_version(image_name):
         logging.exception(res)
         return False
     else:
-        return requests.post(opencv_version, data=data).json().get("OpenCV_version")
+        return requests.post(opencv_version, data=data).json().get("data").get("OpenCV_version")
