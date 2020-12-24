@@ -20,10 +20,10 @@ export const baseRoute = [
     ]
   },
   {
-    path: '/sdk', // 组件库
-    name: 'sdk',
+    path: '/algo_sdk', // 组件库
+    name: 'algo_sdk',
     component: Main,
-    title: 'sdk',
+    title: 'algo_sdk',
     icon: 'component',
     children: [
       {
@@ -60,7 +60,7 @@ export const baseRoute = [
         component: () => import('@/views/ComponentsDemo/AlgoPrecision.vue')
       },
       {
-        path: 'AlgoMessage',
+        path: 'algoMessage',
         name: 'AlgoMessage',
         meta: {
           title: 'AlgoMessage'
