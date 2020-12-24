@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1c224574-d476-4279-a877-296b094c6428" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algoSdk/common/sdk_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/algoSdk/common/sdk_requests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dj_extremevision/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dj_extremevision/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/sidebar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +25,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/frontend/src/components/AlgoFilesResultItem/index.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/frontend/src/components/AlgoMessageItem/index.vue" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1l7qGBeXiiY3TYuLp2Mc9E1KzCz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -220,7 +220,7 @@
       <workItem from="1607598262372" duration="54476000" />
       <workItem from="1608116937080" duration="18906000" />
       <workItem from="1608344464060" duration="13358000" />
-      <workItem from="1608515355583" duration="35875000" />
+      <workItem from="1608515355583" duration="37385000" />
     </task>
     <servers />
   </component>
@@ -255,6 +255,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608634342411" />
+    <state x="540" y="267" key="IDE.errors.dialog" timestamp="1608800703651">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="540" y="267" key="IDE.errors.dialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608800703651" />
     <state x="461" y="156" key="SettingsEditor" timestamp="1607599605153">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -263,10 +267,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="640" y="347" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1608515352726" />
-    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608782771029">
+    <state x="988" y="245" width="647" height="538" key="find.popup" timestamp="1608800657187">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608782771029" />
+    <state x="988" y="245" width="647" height="538" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608800657187" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1608260959586">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

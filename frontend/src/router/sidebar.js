@@ -20,10 +20,10 @@ export const baseRoute = [
     ]
   },
   {
-    path: '/algo_sdk', // 组件库
-    name: 'algo_sdk',
+    path: '/sdk', // 组件库
+    name: 'sdk',
     component: Main,
-    title: 'algo_sdk',
+    title: 'sdk',
     icon: 'component',
     children: [
       {
