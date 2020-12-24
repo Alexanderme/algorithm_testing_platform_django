@@ -3,7 +3,7 @@ import { Message } from 'element-ui'
 
 // base setting
 const service = axios.create({
-  baseURL:"http://192.168.1.103:8001/",
+  baseURL:"http://192.168.1.103:8001/api",
   timeout:500000
 })
 

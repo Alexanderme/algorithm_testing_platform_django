@@ -20,7 +20,7 @@ export function getPackageVas(formData) {
 
 export function getSdkOpenCV(formData) {
   return request({
-    url: 'api/sdk/algoMessage',
+    url: 'sdk/algoMessage',
     method: "post",
     data: formData,
   })

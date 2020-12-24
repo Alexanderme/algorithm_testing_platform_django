@@ -1,12 +1,12 @@
 export default {
   route: {
     dashboard: '首页',
-    algo_sdk: '算法测试平台',
+    sdk: '算法测试平台',
     jsonEditor: 'UI测试平台',
     DataSetVerification: '数据集验证',
     AlgoStandardTest: '算法规范',
     AlgoPerformance: '算法性能',
-    AlgoMessage: '算法信息',
+    algoMessage: '算法信息',
     AlgoPrecision: '算法准确率',
     AlgoFilesResult: '算法文件结果',
     AlgoPackaging: '算法封装',
