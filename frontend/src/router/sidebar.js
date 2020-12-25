@@ -20,7 +20,7 @@ export const baseRoute = [
     ]
   },
   {
-    path: 'sdk', // 组件库
+    path: '/sdk', // 组件库
     name: 'sdk',
     component: Main,
     title: 'sdk',

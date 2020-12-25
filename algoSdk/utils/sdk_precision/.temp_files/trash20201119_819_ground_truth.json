@@ -1,0 +1,1 @@
+[{"class_name": "trash_no_full", "bbox": "119 297 327 500", "used": false}, {"class_name": "trash_no_full", "bbox": "665 353 976 749", "used": false}, {"class_name": "trash_over", "bbox": "403 225 554 452", "used": true}, {"class_name": "trash_over", "bbox": "543 246 754 580", "used": true}]
