@@ -22,14 +22,14 @@ algo_sdk_dir =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ori_files_dir = os.path.join(algo_sdk_dir, f"files/algoFilesdir/ori_%s")
 res_files_dir = os.path.join(algo_sdk_dir, f"files/algoFileResdir/res_%s")
 
-ias_4_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.74_cv4.1.tar.gz"
-ias_3_url = "https://ias-1256261446.cos.ap-guangzhou.myqcloud.com/ias_v4.90_cv3.4.tar.gz"
+ias_4_url = "XXXXXXXXXXXXXXXXXXXXXXXXXX"
+ias_3_url = "XXXXXXXXXXXXXXXXXXXXXXXXXX"
 ias_4_name = "ias_v4.74_cv4.1.tar.gz"
 ias_3_name = "ias_v4.90_cv3.4.tar.gz"
 dockerfile_ias = os.path.join(algo_sdk_dir, "utils/sdkPackage/Dockerfile_ias")
 
-vas_4_url = "https://vas-1256261446.cos.ap-guangzhou.myqcloud.com/vas_v4.3_cv4.1.tar.gz"
-vas_3_url = "https://vas-1256261446.cos.ap-guangzhou.myqcloud.com/vas_v4.3_cv3.4.tar.gz"
+vas_4_url = "XXXXXXXXXXXXXXXXXXXXXXXXXX"
+vas_3_url = "XXXXXXXXXXXXXXXXXXXXXXXXXX"
 vas_4_name = "vas_v4.3_cv4.1.tar.gz "
 vas_3_name = "vas_v4.3_cv3.4.tar.gz"
 dockerfile_vas = os.path.join(algo_sdk_dir, "utils/sdkPackage/Dockerfile_vas")
