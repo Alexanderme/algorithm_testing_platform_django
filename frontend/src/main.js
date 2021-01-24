@@ -1,4 +1,3 @@
-
 // 导入Vue框架
 import Vue from 'vue'
 // 导入主视图文件
